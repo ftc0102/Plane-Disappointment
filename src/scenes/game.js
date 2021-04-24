@@ -19,7 +19,6 @@ class Game extends Phaser.Scene{
         keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
 
-
         // Temporary Enemy
         this.add.rectangle(
             game.config.width / 2,
@@ -28,6 +27,11 @@ class Game extends Phaser.Scene{
             48,
             0xff0000,
         )
+
+        // For the eventual scrolling backgrond
+
+
+
 
     }
 

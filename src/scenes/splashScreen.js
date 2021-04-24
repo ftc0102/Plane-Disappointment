@@ -11,7 +11,7 @@ class splashScreen extends Phaser.Scene {
     create() {
         // menu text configuration
         let menuConfig = {
-            fontFamily: 'Comic Sans',
+            fontFamily: 'Comic Sans MS',
             fontSize: '28px',
             backgroundColor: '#F3B141',
             color: '#843605',
@@ -23,8 +23,11 @@ class splashScreen extends Phaser.Scene {
             fixedWidth: 0
         }
 
+        // Temp Text
         this.add.text(game.config.width/2, game.config.height/2, 'PLANE DISAPPOINTMENT', menuConfig).setOrigin(0.5);
-
     }
 
+    update() {
+        // Basic input controls go here
+    }
 }

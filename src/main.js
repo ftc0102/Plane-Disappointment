@@ -14,7 +14,7 @@ let config = {
     // We can fiddle with the width and height later
     width: 720,
     height: 480,
-    scene: [splashScreen, gameScene],
+    scene: [splashScreen, Game],
 }
 
 let game = new Phaser.Game(config);
