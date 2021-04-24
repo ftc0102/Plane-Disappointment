@@ -5,7 +5,15 @@ class Game extends Phaser.Scene{
 
     preload() {
         // All our game assets go here
-        // Like character art, sprites, etc
+        // Like background art, sprites, bgm, etc
+
+        // Temp art for parallax background
+        // Credit to MarwaMJ on Itch.io
+        this.load.image('sky', './assets/sky.png')
+        this.load.image('mountains', './assets/mountains.png')
+        this.load.image('plateau', './assets/plateau.png')
+        this.load.image('plants', './assets/plants.png')
+        this.load.image('ground', './assets/ground.png')
     }
 
     create() {
@@ -16,6 +24,7 @@ class Game extends Phaser.Scene{
         }, this);
 
         // Keyboard Inputs
+        // I forgot how to do the shortcut that Adam showed in lecture, so if you do you can replace this code.
         keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
 
@@ -29,6 +38,9 @@ class Game extends Phaser.Scene{
         )
 
         // For the eventual scrolling backgrond
+        const width = this.scale.width
+        const height = this.scale.height
+
 
 
 

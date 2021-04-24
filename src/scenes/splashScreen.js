@@ -6,6 +6,7 @@ class splashScreen extends Phaser.Scene {
 
     preload() {
         // Load main menu assets here
+        // It can be cute art and music
     }
 
     create() {
@@ -29,5 +30,6 @@ class splashScreen extends Phaser.Scene {
 
     update() {
         // Basic input controls go here
+        // Click or Spacebar to start game
     }
 }
