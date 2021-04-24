@@ -31,5 +31,9 @@ class splashScreen extends Phaser.Scene {
     update() {
         // Basic input controls go here
         // Click or Spacebar to start game
+        this.input.on('pointerdown', function (pointer) {
+            // this.sound.play(CUTE SOUND EFFECT GOES HERE)
+            this.scene.start('gameScene');
+        }, this);
     }
 }
