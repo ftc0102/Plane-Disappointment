@@ -18,6 +18,17 @@ class Game extends Phaser.Scene{
         // Keyboard Inputs
         keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
+
+
+        // Temporary Enemy
+        this.add.rectangle(
+            game.config.width / 2,
+            game.config.height / 2,
+            48,
+            48,
+            0xff0000,
+        )
+
     }
 
     update() {
