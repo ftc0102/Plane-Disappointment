@@ -39,10 +39,6 @@ class Game extends Phaser.Scene{
         this.load.image('plateau', './assets/plateau.png');
         this.load.image('ground', './assets/ground.png');
         this.load.image('plant', './assets/plant.png');
-
-        //Temp art for player and playtest
-        this.load.spritesheet('player', './assets/dinoSprites.png', { frameWidth: 24, frameHeight: 1});
-
     }
 
     create() {
@@ -69,17 +65,10 @@ class Game extends Phaser.Scene{
         createAligned(this, totalWidth, 'ground', 1);
         createAligned(this, totalWidth, 'plant', 1.25);
 
-        // Temp Player Animation for playtest
-        this.anims.create({
-            key: 'run',
-            frames: this.anims.generateFrameNumbers('player', {start: 1, end: 7, first: 0}),
-            frameRate: 10.5
-        });
 
         // Temp Player
-        const dinoPlayer = this.add.sprite(600, 370);
-        dinoPlayer.setScale(8);
-        dinoPlayer.play('run');
+        this.player = new Player(this, game.config.width/2, game.config.height/2, 'player').setOrigin(0, 0);
+        this.player.setScale(8);
 
     }
 

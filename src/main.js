@@ -14,6 +14,16 @@ let config = {
     // We can fiddle with the width and height later
     width: 1280,
     height: 720,
+    physics: {
+        default: 'arcade',
+        arcade: {
+            // debug = true,
+            gravity: {
+                x: 0,
+                y: 0
+            }
+        }
+    },
     scene: [Game, splashScreen],
 }
 
