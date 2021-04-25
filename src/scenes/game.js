@@ -69,7 +69,6 @@ class Game extends Phaser.Scene{
         // Temp Player
         this.player = new Player(this, game.config.width/2, game.config.height/2, 'player').setOrigin(0, 0);
         this.player.setScale(8);
-
     }
 
     update() {
@@ -83,6 +82,7 @@ class Game extends Phaser.Scene{
         const speed = 5
         
         cam.scrollX += speed
+        this.player.x += speed
 
     }
 
