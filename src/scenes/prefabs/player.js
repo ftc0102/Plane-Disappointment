@@ -24,5 +24,8 @@ class Player extends Phaser.Physics.Arcade.Sprite{
         //Temp art for player and playtest
         this.load.spritesheet('tempArt', './assets/dinoSprites.png', { frameWidth: 24, frameHeight: 1});
         this.player.play('run');
+
+        //jump
+        //this.input.on('pointerdown', this.jump, this);
     }
 }

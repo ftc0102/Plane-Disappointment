@@ -43,11 +43,6 @@ class Game extends Phaser.Scene{
 
     create() {
 
-        // Mouse click to jump
-        this.input.on('pointerdown', function (pointer) {
-            // player jumps
-        }, this);
-
         // Keyboard Inputs
         // I forgot how to do the shortcut that Adam showed in lecture, so if you do you can replace this code.
         keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
@@ -65,10 +60,22 @@ class Game extends Phaser.Scene{
         createAligned(this, totalWidth, 'ground', 1);
         createAligned(this, totalWidth, 'plant', 1.25);
 
-
         // Temp Player
-        this.player = new Player(this, game.config.width/2, game.config.height/2, 'player').setOrigin(0, 0);
+        this.player = new Player(this, game.config.width/3, game.config.height/2, 'player').setOrigin(0, 0);
         this.player.setScale(8);
+        
+        //gravity (credit to https://phasergames.com/how-to-jump-in-phaser-3/ for this section and the jump section)
+        this.player.setGravityY(100); //Makes the player go down by default
+        let floorHorizontal = game.config.width/2;
+        let floorVertical = game.config.height * .95;
+        this.floor = this.physics.add.sprite(floorHorizontal, floorVertical, "floor"); //makes a floor for player to rest
+        this.floor.displayWidth = game.config.width * 1.1; // makes it go across the screen
+        this.physics.add.collider(this.player, this.floor); // allows for hit detection between player and floor
+        this.floor.setPushable(false); //prevents floor from being moved by player
+
+
+        // Mouse click to jump
+        this.input.on('pointerdown', this.jump, this);
     }
 
     update() {
@@ -82,9 +89,13 @@ class Game extends Phaser.Scene{
         const speed = 5
         
         cam.scrollX += speed
-        this.player.x += speed
+        this.player.x += speed //offsets camera, locking player in place
+        this.floor.x += speed //same thing for the floor
 
     }
 
+    jump(){
+        this.player.setVelocityY(-100); //allows the for the player to go up before gravity exists
+    }
 
 }
