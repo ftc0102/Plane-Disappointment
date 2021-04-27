@@ -8,6 +8,7 @@
  * @param {number} scrollFactor 
  */
 const createAligned = (scene, totalWidth, texture, scrollFactor) => {
+    // Terrible variable names, but I'm not sure what to call them
     const w = scene.textures.get(texture).getSourceImage().width
     const count = Math.ceil(totalWidth / w) * scrollFactor
 
@@ -39,6 +40,7 @@ class Game extends Phaser.Scene{
         this.load.image('plateau', './assets/plateau.png');
         this.load.image('ground', './assets/ground.png');
         this.load.image('plant', './assets/plant.png');
+
     }
 
     create() {
@@ -61,13 +63,17 @@ class Game extends Phaser.Scene{
         createAligned(this, totalWidth, 'plant', 1.25);
 
         // Temp Player
-        this.player = new Player(this, game.config.width/3, game.config.height/2, 'player').setOrigin(0, 0);
+        this.player = new Player(this, game.config.width/10, game.config.height/2, 'player').setOrigin(0, 0);
         this.player.setScale(8);
         
+        
         //gravity (credit to https://phasergames.com/how-to-jump-in-phaser-3/ for this section and the jump section)
-        this.player.setGravityY(100); //Makes the player go down by default
+        this.player.setGravityY(300); //Makes the player go down by default
+
+        
         let floorHorizontal = game.config.width/2;
-        let floorVertical = game.config.height * .95;
+        let floorVertical = game.config.height * .90;
+
         this.floor = this.physics.add.sprite(floorHorizontal, floorVertical, "floor"); //makes a floor for player to rest
         this.floor.displayWidth = game.config.width * 1.1; // makes it go across the screen
         this.physics.add.collider(this.player, this.floor); // allows for hit detection between player and floor
@@ -95,7 +101,7 @@ class Game extends Phaser.Scene{
     }
 
     jump(){
-        this.player.setVelocityY(-100); //allows the for the player to go up before gravity exists
+        this.player.setVelocityY(-180); //allows the for the player to go up before gravity exists
     }
 
 }

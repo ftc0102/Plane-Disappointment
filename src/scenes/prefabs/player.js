@@ -26,6 +26,6 @@ class Player extends Phaser.Physics.Arcade.Sprite{
         this.player.play('run');
 
         //jump
-        //this.input.on('pointerdown', this.jump, this);
+        this.input.on('pointerdown', this.jump, this);
     }
 }
