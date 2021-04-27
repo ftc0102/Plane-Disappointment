@@ -28,27 +28,13 @@ class Game extends Phaser.Scene{
         super("gameScene");
     }
 
-    preload() {
-        // All our game assets go here
-        // Like background art, sprites, bgm, etc
-
-        // Temp art for parallax background
-        // Credit to MarwaMJ on Itch.io for assets
-        // Credit to Ourcade on Youtube for tutorial https://www.youtube.com/watch?v=Y3C5HliTDwM
-        this.load.image('sky', './assets/sky.png');
-        this.load.image('mountains', './assets/mountains.png');
-        this.load.image('plateau', './assets/plateau.png');
-        this.load.image('ground', './assets/ground.png');
-        this.load.image('plant', './assets/plant.png');
-
-    }
+    // ALL PRELOADS HAVE BEEN MOVED TO PRELOADGAME.JS 
 
     create() {
 
         // Keyboard Inputs
-        // I forgot how to do the shortcut that Adam showed in lecture, so if you do you can replace this code.
-        keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
-        keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
+        // cursor keys!
+        let cursors = this.input.keyboard.createCursorKeys();
 
         // For the eventual scrolling backgrond
         const width = this.scale.width

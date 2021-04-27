@@ -7,10 +7,7 @@ class Player extends Phaser.Physics.Arcade.Sprite{
         //this.JUMP_IMPULSE = -500;
     }
 
-    preload() {
-        //Temp art for player and playtest
-        this.load.atlas('tempArt', './assets/dinoSprites.png', { frameWidth: 24, frameHeight: 1});
-    }
+    // ALL PRELOADS HAVE BEEN MOVED TO PRELOADGAME.JS 
 
     create() {
         // Temp Player Animation for playtest

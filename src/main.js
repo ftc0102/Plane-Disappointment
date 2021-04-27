@@ -24,7 +24,7 @@ let config = {
             }
         }
     },
-    scene: [Game, splashScreen],
+    scene: [preloadGame, splashScreen, Game],
 }
 
 let game = new Phaser.Game(config);
