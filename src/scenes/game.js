@@ -66,22 +66,23 @@ class Game extends Phaser.Scene{
         this.player = new Player(this, game.config.width/10, game.config.height/2, 'player').setOrigin(0, 0);
         this.player.setScale(8);
         
-        
         //gravity (credit to https://phasergames.com/how-to-jump-in-phaser-3/ for this section and the jump section)
         this.player.setGravityY(300); //Makes the player go down by default
 
-        
+        // Variables for the floor creation
         let floorHorizontal = game.config.width/2;
         let floorVertical = game.config.height * .90;
-
+        // Floor creation
         this.floor = this.physics.add.sprite(floorHorizontal, floorVertical, "floor"); //makes a floor for player to rest
         this.floor.displayWidth = game.config.width * 1.1; // makes it go across the screen
         this.physics.add.collider(this.player, this.floor); // allows for hit detection between player and floor
         this.floor.setPushable(false); //prevents floor from being moved by player
 
-
         // Mouse click to jump
         this.input.on('pointerdown', this.jump, this);
+
+        // GAME OVER flag for later
+        this.gameOver = false;
     }
 
     update() {
@@ -92,16 +93,25 @@ class Game extends Phaser.Scene{
 
         // Parallax scrolling
         const cam = this.cameras.main
-        const speed = 5
+        const speed = 10
+        const MIN_SPEED = 5
+        const MAX_SPEED = 20
         
-        cam.scrollX += speed
-        this.player.x += speed //offsets camera, locking player in place
-        this.floor.x += speed //same thing for the floor
+        // These 3 lines have to be identical after the "=" sign in order to keep it looking nice
+        cam.scrollX += Phaser.Math.Clamp(speed, MIN_SPEED, MAX_SPEED)
+        this.player.x += Phaser.Math.Clamp(speed, MIN_SPEED, MAX_SPEED) //offsets camera, locking player in place
+        this.floor.x += Phaser.Math.Clamp(speed, MIN_SPEED, MAX_SPEED) //same thing for the floor
 
     }
 
     jump(){
-        this.player.setVelocityY(-180); //allows the for the player to go up before gravity exists
+        if (this.player.body.onFloor()){
+            this.player.setVelocityY(-180); //allows the for the player to go up before gravity exists
+        }
+    }
+
+    slide(){
+        // player slide mechanic upon pressing down arrow
     }
 
 }
