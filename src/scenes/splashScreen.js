@@ -26,6 +26,7 @@ class splashScreen extends Phaser.Scene {
 
         // Temp Text
         this.add.text(game.config.width/2, game.config.height/2, 'PLANE DISAPPOINTMENT', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 + 50, 'LEFT CLICK TO PLAY', menuConfig).setOrigin(0.5);
     }
 
     update() {
@@ -33,7 +34,7 @@ class splashScreen extends Phaser.Scene {
         // Click or Spacebar to start game
         this.input.on('pointerdown', function (pointer) {
             // this.sound.play(CUTE SOUND EFFECT GOES HERE)
-            this.scene.start('preloadGame');
+            this.scene.start('gameScene');
         }, this);
     }
 }

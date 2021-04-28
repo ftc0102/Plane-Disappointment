@@ -17,6 +17,6 @@ class preloadGame extends Phaser.Scene{
 
     }
     create(){
-        this.scene.start("gameScene");
+        this.scene.start("splashScreen");
     }
 }
