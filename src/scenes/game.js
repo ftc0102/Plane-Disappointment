@@ -29,12 +29,7 @@ class Game extends Phaser.Scene{
     }
 
     // ALL PRELOADS HAVE BEEN MOVED TO PRELOADGAME.JS 
-
     create() {
-
-        // Keyboard Inputs
-        // cursor keys!
-        let cursors = this.input.keyboard.createCursorKeys();
 
         // For the eventual scrolling backgrond
         const width = this.scale.width
@@ -88,6 +83,17 @@ class Game extends Phaser.Scene{
         this.player.x += Phaser.Math.Clamp(speed, MIN_SPEED, MAX_SPEED) //offsets camera, locking player in place
         this.floor.x += Phaser.Math.Clamp(speed, MIN_SPEED, MAX_SPEED) //same thing for the floor
 
+        // Keyboard input! Has to be here and not in create() for some reason, not sure why
+        let cursors = this.input.keyboard.createCursorKeys();
+
+        
+        // Press down to slide
+        // Currently incomplete
+        if (cursors.down.isDown){
+            // call slide function
+        }
+
+
     }
 
     jump(){
@@ -97,7 +103,10 @@ class Game extends Phaser.Scene{
     }
 
     slide(){
-        // player slide mechanic upon pressing down arrow
+        // If player is on floor and while DOWN is held
+            // Change animation
+            // Change collision box
+        pass // delete this when the function is made
     }
 
 }
