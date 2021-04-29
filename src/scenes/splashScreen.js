@@ -27,13 +27,17 @@ class splashScreen extends Phaser.Scene {
         // Temp Text
         this.add.text(game.config.width/2, game.config.height/2, 'PLANE DISAPPOINTMENT', menuConfig).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/2 + 50, 'LEFT CLICK TO PLAY', menuConfig).setOrigin(0.5);
+
+        // sound for clicking
+        this.mouseClick = this.sound.add('mouseClick');
+        
     }
 
     update() {
         // Basic input controls go here
         // Click or Spacebar to start game
         this.input.on('pointerdown', function (pointer) {
-            // this.sound.play(CUTE SOUND EFFECT GOES HERE)
+            this.mouseClick.play();
             this.scene.start('gameScene');
         }, this);
     }
