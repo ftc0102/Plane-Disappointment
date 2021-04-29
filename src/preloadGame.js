@@ -11,12 +11,15 @@ class preloadGame extends Phaser.Scene{
         this.load.image('plateau', './assets/plateau.png');
         this.load.image('ground', './assets/ground.png');
         this.load.image('plant', './assets/plant.png');
+        
 
         // Mouse Click Sound
         this.load.audio('mouseClick', './assets/mouseClick2.ogg');
         // Player temp art
         this.load.atlas('tempArt', './assets/dinoSprites.png', { frameWidth: 24, frameHeight: 1});
 
+        //temp bgm
+        this.load.audio('temp_bgm', './assets/dreamybgm.mp3');
     }
     create(){
         this.scene.start("splashScreen");

@@ -31,6 +31,8 @@ class Game extends Phaser.Scene{
     // ALL PRELOADS HAVE BEEN MOVED TO PRELOADGAME.JS 
     create() {
 
+        //temp bgm play
+        this.sound.play('temp_bgm');
         // For the eventual scrolling backgrond
         const width = this.scale.width
         const height = this.scale.height
