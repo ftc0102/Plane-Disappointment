@@ -28,3 +28,11 @@ let config = {
 }
 
 let game = new Phaser.Game(config);
+<<<<<<< Updated upstream
+=======
+
+
+// These are duck and jump, respectively
+// I forgot how to do the shortcut that Adam showed in lecture, so if you do you can replace this code.
+// let keyDOWN, keyUP;
+>>>>>>> Stashed changes

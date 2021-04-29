@@ -28,11 +28,46 @@ class Game extends Phaser.Scene{
         super("gameScene");
     }
 
+<<<<<<< Updated upstream
     // ALL PRELOADS HAVE BEEN MOVED TO PRELOADGAME.JS 
     create() {
 
         //temp bgm play
         this.sound.play('temp_bgm');
+=======
+    preload() {
+        // All our game assets go here
+        // Like background art, sprites, bgm, etc
+
+        // Temp art for parallax background
+        // Credit to MarwaMJ on Itch.io for assets
+        // Credit to Ourcade on Youtube for tutorial https://www.youtube.com/watch?v=Y3C5HliTDwM
+        this.load.image('sky', './assets/sky.png');
+        this.load.image('mountains', './assets/mountains.png');
+        this.load.image('plateau', './assets/plateau.png');
+        this.load.image('ground', './assets/ground.png');
+        this.load.image('plant', './assets/plant.png');
+        
+        // load running spritesheet (temp asset)
+        this.load.spritesheet('dino', './assets/dinoSprites.png', 
+        { frameWidth: 24, frameHeight: 24});
+    }
+
+    create() {
+        
+        this.dino = this.physics.add.sprite(1, 1, 'dino');
+        // Mouse click to jump
+        this.input.on('pointerdown', function (pointer) {
+            // player jumps
+        }, this);
+
+        // Keyboard Inputs
+        // I forgot how to do the shortcut that Adam showed in lecture, so if you do you can replace this code.
+        // replaced with code that adam used in lecture
+        // cursorKeys are the up/down/left/right arrow keys
+        game.cursors = this.input.keyboard.createCursorKeys();
+
+>>>>>>> Stashed changes
         // For the eventual scrolling backgrond
         const width = this.scale.width
         const height = this.scale.height
@@ -45,6 +80,7 @@ class Game extends Phaser.Scene{
         createAligned(this, totalWidth, 'ground', 1);
         createAligned(this, totalWidth, 'plant', 1.25);
 
+<<<<<<< Updated upstream
         // Temp Player
         this.player = new Player(this, game.config.width/10, game.config.height/2, 'player').setOrigin(0, 0);
         this.player.setScale(8);
@@ -63,6 +99,27 @@ class Game extends Phaser.Scene{
 
         // Mouse click to jump
         this.input.on('pointerdown', this.jump, this);
+=======
+        // creating dino run animation
+        this.anims.create({
+            key: 'run',
+            frames: this.anims.generateFrameNumbers('dino', {start: 17, end: 23, first: 0}),
+            frameRate: 10.5,
+            repeat: -1
+        });
+       
+        this.dino = this.physics.add.sprite(game.config.width/2, game.config.height/2, 'dino').setOrigin(0,0);
+        this.dino.setScale(8);
+        this.dino.anims.play('run');
+        // let dinoRun = new Player(this, game.config.width/2, game.config.height/2, 'dino').setOrigin(0, 0);
+        // dinoRun.anims.play('run');
+        // dinoRun.setScale(8);
+        
+        // Temp Player
+        // this.player = new Player(this, game.config.width/2, game.config.height/2, 'dino').setOrigin(0, 0);
+        // this.player.anims.play('run');
+        // this.player.setScale(8);
+>>>>>>> Stashed changes
 
         // GAME OVER flag for later
         this.gameOver = false;
