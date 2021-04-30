@@ -26,7 +26,9 @@ class splashScreen extends Phaser.Scene {
 
         // Temp Text
         this.add.text(game.config.width/2, game.config.height/2, 'PLANE DISAPPOINTMENT', menuConfig).setOrigin(0.5);
-        this.add.text(game.config.width/2, game.config.height/2 + 50, 'LEFT CLICK TO PLAY', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 + 50, 'COLLECT THE ITEMS IN THE AIR', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 + 100, 'AVOID THE OBSTACLES ON THE GROUND', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 + 150, 'LEFT CLICK TO PLAY AND JUMP', menuConfig).setOrigin(0.5);
 
         // sound for clicking
         this.mouseClick = this.sound.add('mouseClick');
