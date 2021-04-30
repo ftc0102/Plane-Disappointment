@@ -73,6 +73,21 @@ class Game extends Phaser.Scene{
         // GAME OVER flag for later
         this.gameOver = false;
 
+        // score stuff
+        this.playerScoreValue = 0;
+        let scoreConfig = {
+            fontFamily: 'Comic Sans MS',
+            fontSize: '28px',
+            align: 'right',
+            padding: {
+                top: 5,
+                bottom: 5,
+            },
+            fixedWidth: 100
+        }
+
+        this.playerScoreDisplay = this.add.text(0, 0, this.playerScoreValue, scoreConfig);
+
     }
 
     update() {
@@ -90,6 +105,7 @@ class Game extends Phaser.Scene{
         cam.scrollX += Phaser.Math.Clamp(speed, MIN_SPEED, MAX_SPEED)
         this.player.x += Phaser.Math.Clamp(speed, MIN_SPEED, MAX_SPEED) //offsets camera, locking player in place
         this.floor.x += Phaser.Math.Clamp(speed, MIN_SPEED, MAX_SPEED) //same thing for the floor
+        this.playerScoreDisplay.x += Phaser.Math.Clamp(speed, MIN_SPEED, MAX_SPEED)
 
         // Keyboard input! Has to be here and not in create() for some reason, not sure why
         let cursors = this.input.keyboard.createCursorKeys();
