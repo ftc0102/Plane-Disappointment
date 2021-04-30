@@ -31,8 +31,13 @@ class Game extends Phaser.Scene{
     // ALL PRELOADS HAVE BEEN MOVED TO PRELOADGAME.JS 
     create() {
 
-        //temp bgm play
-        this.sound.play('temp_bgm');
+        if (!bgMusic) {
+            bgMusic = this.sound.add('temp_bgm', { volume: 0.3 });
+            bgMusic.play({
+              loop: true,
+            });
+        }
+
         // For the eventual scrolling backgrond
         const width = this.scale.width
         const height = this.scale.height
@@ -66,6 +71,7 @@ class Game extends Phaser.Scene{
 
         // GAME OVER flag for later
         this.gameOver = false;
+
     }
 
     update() {
