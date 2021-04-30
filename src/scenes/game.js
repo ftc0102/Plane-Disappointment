@@ -38,6 +38,9 @@ class Game extends Phaser.Scene{
             });
         }
 
+        // Define restart key
+        keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
+
         // For the eventual scrolling backgrond
         const width = this.scale.width
         const height = this.scale.height
@@ -71,7 +74,7 @@ class Game extends Phaser.Scene{
         this.input.on('pointerdown', this.jump, this);
 
         // GAME OVER flag for later
-        this.gameOver = false;
+        this.gameOver = true;
 
         // score stuff
         this.playerScoreValue = 0;
@@ -91,6 +94,14 @@ class Game extends Phaser.Scene{
     }
 
     update() {
+
+        // Game Over & Restart
+        if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)){
+            this.scene.restart();
+        }
+
+
+
         // Here's my proposal on how we do the world generation:
         // We create prefab scenes that we then generate through code to appear in the game scene
         // We can make like a set of obstacles, save it as a prefab, and have the game cycle through a set of them
@@ -110,7 +121,6 @@ class Game extends Phaser.Scene{
         // Keyboard input! Has to be here and not in create() for some reason, not sure why
         let cursors = this.input.keyboard.createCursorKeys();
 
-        
         // Press down to slide
         // Currently incomplete
         if (cursors.down.isDown){
