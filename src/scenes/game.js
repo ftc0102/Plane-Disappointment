@@ -32,7 +32,7 @@ class Game extends Phaser.Scene{
     create() {
 
         if (!bgMusic) {
-            bgMusic = this.sound.add('temp_bgm', { volume: 0.3 });
+            bgMusic = this.sound.add('backgroundMusic', { volume: 0.3 });
             bgMusic.play({
               loop: true,
             });

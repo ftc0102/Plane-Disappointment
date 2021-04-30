@@ -19,7 +19,7 @@ class preloadGame extends Phaser.Scene{
         this.load.spritesheet('tempArt', './assets/dinoSprites.png', { frameWidth: 24, frameHeight: 24});
 
         //temp bgm
-        this.load.audio('temp_bgm', './assets/dreamybgm.mp3');
+        this.load.audio('backgroundMusic', './assets/bgm.mp3');
     }
     create(){
         this.scene.start("splashScreen");
