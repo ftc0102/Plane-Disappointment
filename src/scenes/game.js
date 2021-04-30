@@ -51,11 +51,12 @@ class Game extends Phaser.Scene{
         createAligned(this, totalWidth, 'plant', 1.25);
 
         // Temp Player
-        this.player = new Player(this, game.config.width/10, game.config.height/2, 'player').setOrigin(0, 0);
-        this.player.setScale(8);
+        this.player = new Player(this, game.config.width/10, game.config.height/2, 'dino').setOrigin(0, 0);
+        this.player.anims.play('run');      // plays the running animation
+        this.player.setScale(8);            // makes the player bigger
         
         //gravity (credit to https://phasergames.com/how-to-jump-in-phaser-3/ for this section and the jump section)
-        this.player.setGravityY(300); //Makes the player go down by default
+        this.player.setGravityY(600); //Makes the player go down by default
 
         // Variables for the floor creation
         let floorHorizontal = game.config.width/2;
@@ -79,7 +80,6 @@ class Game extends Phaser.Scene{
         // We create prefab scenes that we then generate through code to appear in the game scene
         // We can make like a set of obstacles, save it as a prefab, and have the game cycle through a set of them
         // It'll definitely be the most difficult part of our project, and I'm not sure if I have the skills to tackle it
-
         // Parallax scrolling
         const cam = this.cameras.main
         const speed = 10
@@ -106,7 +106,7 @@ class Game extends Phaser.Scene{
 
     jump(){
         if (this.player.body.onFloor()){
-            this.player.setVelocityY(-180); //allows the for the player to go up before gravity exists
+            this.player.setVelocityY(-400); //allows the for the player to go up before gravity exists
         }
     }
 

@@ -8,18 +8,5 @@ class Player extends Phaser.Physics.Arcade.Sprite{
     }
 
     // ALL PRELOADS HAVE BEEN MOVED TO PRELOADGAME.JS 
-
-    create() {
-        // Temp Player Animation for playtest
-        this.anims.create({
-            key: 'run',
-            frames: this.anims.generateFrameNumbers('tempArt', {start: 1, end: 7, first: 0}),
-            frameRate: 10,
-            repeat: -1
-        });
-
-        //Temp art for player and playtest
-        this.load.spritesheet('tempArt', './assets/dinoSprites.png', { frameWidth: 24, frameHeight: 1});
-        this.player.play('run');
-    }
+    
 }
