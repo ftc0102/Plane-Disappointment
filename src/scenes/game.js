@@ -62,7 +62,7 @@ class Game extends Phaser.Scene{
         let floorHorizontal = game.config.width/2;
         let floorVertical = game.config.height * .90;
         // Floor creation
-        this.floor = this.physics.add.sprite(floorHorizontal, floorVertical, "floor"); //makes a floor for player to rest
+        this.floor = this.physics.add.sprite(floorHorizontal, floorVertical); //makes a floor for player to rest
         this.floor.displayWidth = game.config.width * 1.1; // makes it go across the screen
         this.physics.add.collider(this.player, this.floor); // allows for hit detection between player and floor
         this.floor.setPushable(false); //prevents floor from being moved by player
