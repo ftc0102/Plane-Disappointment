@@ -13,13 +13,13 @@ class Player extends Phaser.Physics.Arcade.Sprite{
         // Temp Player Animation for playtest
         this.anims.create({
             key: 'run',
-            frames: this.anims.generateFrameNumbers('tempArt', {start: 1, end: 7, first: 0}),
+            frames: this.anims.generateFrameNumbers('tempArt', {start: 17, end: 23}),
             frameRate: 10,
             repeat: -1
         });
 
         //Temp art for player and playtest
-        this.load.spritesheet('tempArt', './assets/dinoSprites.png', { frameWidth: 24, frameHeight: 1});
+        this.load.spritesheet('tempArt', './assets/dinoSprites.png', { frameWidth: 24, frameHeight: 24});
         this.player.play('run');
     }
 }

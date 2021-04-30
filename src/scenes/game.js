@@ -27,16 +27,22 @@ class Game extends Phaser.Scene{
     constructor() {
         super("gameScene");
     }
-
+   
     // ALL PRELOADS HAVE BEEN MOVED TO PRELOADGAME.JS 
     create() {
 
         //temp bgm play
-        this.sound.play('temp_bgm');
+        if(!bgMusic) {
+            bgMusic = this.sound.add('temp_bgm', {volume: 0.3});
+            bgMusic.play({
+                loop:true,
+            });
+        }
+        
         // For the eventual scrolling backgrond
-        const width = this.scale.width
-        const height = this.scale.height
-        const totalWidth = width * width
+        const width = this.scale.width;
+        const height = this.scale.height;
+        const totalWidth = width * width;
 
         // Parallax pieces
         this.add.image(width * 0.5, height * 0.5, 'sky').setScrollFactor(0)
@@ -44,6 +50,21 @@ class Game extends Phaser.Scene{
         createAligned(this, totalWidth, 'plateau', 0.5);
         createAligned(this, totalWidth, 'ground', 1);
         createAligned(this, totalWidth, 'plant', 1.25);
+        // this.sky = this.add.tileSprite(
+        //     0,0,1920,1080 / 2, 'sky'
+        //     ).setOrigin(0,0);
+        // this.mountains = this.add.tileSprite(
+        //     0,0,1919,782, 'mountains'
+        //     ).setOrigin(0,0);
+        // this.plateau = this.add.tileSprite(
+        //     0,0,1920,751, 'plateau'
+        //     ).setOrigin(0,0);
+        // this.ground = this.add.tileSprite(
+        //     0,0,1920,198, 'ground'
+        //     ).setOrigin(0,0);
+        // this.plant = this.add.tileSprite(
+        //     0,0,1689,216, 'plant'
+        //     ).setOrigin(0,0);
 
         // Temp Player
         this.player = new Player(this, game.config.width/10, game.config.height/2, 'player').setOrigin(0, 0);
@@ -52,6 +73,9 @@ class Game extends Phaser.Scene{
         //gravity (credit to https://phasergames.com/how-to-jump-in-phaser-3/ for this section and the jump section)
         this.player.setGravityY(300); //Makes the player go down by default
 
+        // this.input.on('pointerdown', function (pointer) {
+        //     this.jump();
+        // }, this);
         // Variables for the floor creation
         let floorHorizontal = game.config.width/2;
         let floorVertical = game.config.height * .90;
@@ -73,13 +97,19 @@ class Game extends Phaser.Scene{
         // We create prefab scenes that we then generate through code to appear in the game scene
         // We can make like a set of obstacles, save it as a prefab, and have the game cycle through a set of them
         // It'll definitely be the most difficult part of our project, and I'm not sure if I have the skills to tackle it
-
+        
         // Parallax scrolling
         const cam = this.cameras.main
         const speed = 10
         const MIN_SPEED = 5
         const MAX_SPEED = 20
         
+        // this.sky.tilePositionX -= 0;
+        // this.mountains.tilePositionX -= .25;
+        // this.plateau.tilePositionX -= .5;
+        // this.ground.tilePositionX -= 1;
+        // this.plant.tilePositionX -= 1.25;
+
         // These 3 lines have to be identical after the "=" sign in order to keep it looking nice
         cam.scrollX += Phaser.Math.Clamp(speed, MIN_SPEED, MAX_SPEED)
         this.player.x += Phaser.Math.Clamp(speed, MIN_SPEED, MAX_SPEED) //offsets camera, locking player in place
@@ -100,7 +130,9 @@ class Game extends Phaser.Scene{
 
     jump(){
         if (this.player.body.onFloor()){
+            console.log('velocity');
             this.player.setVelocityY(-180); //allows the for the player to go up before gravity exists
+            console.log('you jumped');
         }
     }
 

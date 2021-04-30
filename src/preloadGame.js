@@ -16,7 +16,7 @@ class preloadGame extends Phaser.Scene{
         // Mouse Click Sound
         this.load.audio('mouseClick', './assets/mouseClick2.ogg');
         // Player temp art
-        this.load.atlas('tempArt', './assets/dinoSprites.png', { frameWidth: 24, frameHeight: 1});
+        this.load.spritesheet('tempArt', './assets/dinoSprites.png', { frameWidth: 24, frameHeight: 24});
 
         //temp bgm
         this.load.audio('temp_bgm', './assets/dreamybgm.mp3');

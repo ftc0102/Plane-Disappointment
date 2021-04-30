@@ -7,6 +7,7 @@ class splashScreen extends Phaser.Scene {
     preload() {
         // Load main menu assets here
         // It can be cute art and music
+        this.load.audio('mouseClick', './assets/mouseClick2.ogg');
     }
 
     create() {
@@ -37,7 +38,7 @@ class splashScreen extends Phaser.Scene {
         // Basic input controls go here
         // Click or Spacebar to start game
         this.input.on('pointerdown', function (pointer) {
-            this.mouseClick.play();
+            this.mouseClick.play(); // changed here
             this.scene.start('gameScene');
         }, this);
     }
