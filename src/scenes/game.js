@@ -74,7 +74,7 @@ class Game extends Phaser.Scene{
         this.input.on('pointerdown', this.jump, this);
 
         // GAME OVER flag for later
-        this.gameOver = true;
+        this.gameOver = false;
 
         // score stuff
         this.playerScoreValue = 0;
