@@ -18,11 +18,6 @@ class Game extends Phaser.Scene{
         // Define restart key
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
 
-        // For the eventual scrolling backgrond
-        const width = this.scale.width
-        const height = this.scale.height
-        const totalWidth = width * width
-
         // Parallax pieces
         // The last 2 integers are the dimensions of the image, make sure to set the correct ones.
         // The first 2 integers are the X, Y coordinates
