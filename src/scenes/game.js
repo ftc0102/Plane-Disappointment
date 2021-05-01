@@ -24,6 +24,9 @@ class Game extends Phaser.Scene{
         const totalWidth = width * width
 
         // Parallax pieces
+        // The last 2 integers are the dimensions of the image, make sure to set the correct ones.
+        // The first 2 integers are the X, Y coordinates
+        // The string is the name of the asset, declared in preloadGame.js
         this.sky = this.add.tileSprite(0, 0, 1920, 1080, 'sky').setOrigin(0)
         this.mountains = this.add.tileSprite(0, 0, 1919, 782, 'mountains').setOrigin(0)
         this.plateau = this.add.tileSprite(0, 0, 1920, 751, 'plateau').setOrigin(0)
@@ -77,10 +80,14 @@ class Game extends Phaser.Scene{
             this.scene.restart();
         }
 
+        // Change these values to change how fast the parallax effect occurs
+        // Note that the sky is not here. If you want the sky to parallax, include an
+        // identical line of code that is the same as those below this.
         this.mountains.tilePositionX += .25;
         this.plateau.tilePositionX += .5;
         this.ground.tilePositionX += 1;
         this.plant.tilePositionX += 1.25;
+
         // Keyboard input! Has to be here and not in create() for some reason, not sure why
         let cursors = this.input.keyboard.createCursorKeys();
 
