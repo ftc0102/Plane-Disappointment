@@ -31,6 +31,8 @@ class Game extends Phaser.Scene{
     // ALL PRELOADS HAVE BEEN MOVED TO PRELOADGAME.JS 
     create() {
 
+        console.log("testing to see if I can merge branches to main");
+
         if (!bgMusic) {
             bgMusic = this.sound.add('backgroundMusic', { volume: 0.3 });
             bgMusic.play({
