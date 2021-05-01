@@ -1,28 +1,3 @@
-// Helper function to create more art as the screen scrolls
-// Credit to Ourcade on Youtube
-/**
- * 
- * @param {Phaser.Scene} scene 
- * @param {number} totalWidth 
- * @param {string} texture 
- * @param {number} scrollFactor 
- */
-const createAligned = (scene, totalWidth, texture, scrollFactor) => {
-    // Terrible variable names, but I'm not sure what to call them
-    const w = scene.textures.get(texture).getSourceImage().width
-    const count = Math.ceil(totalWidth / w) * scrollFactor
-
-    let x = 0
-    for (let i = 0; i < count; ++i)
-    {
-        const m = scene.add.image(x, scene.scale.height, texture)
-            .setOrigin(0, 1)
-            .setScrollFactor(scrollFactor)
-
-        x += m.width
-    }
-}
-
 class Game extends Phaser.Scene{
     constructor() {
         super("gameScene");
@@ -49,11 +24,11 @@ class Game extends Phaser.Scene{
         const totalWidth = width * width
 
         // Parallax pieces
-        this.add.image(width * 0.5, height * 0.5, 'sky').setScrollFactor(0)
-        createAligned(this, totalWidth, 'mountains', 0.25);
-        createAligned(this, totalWidth, 'plateau', 0.5);
-        createAligned(this, totalWidth, 'ground', 1);
-        createAligned(this, totalWidth, 'plant', 1.25);
+        this.sky = this.add.tileSprite(0, 0, 1920, 1080, 'sky').setOrigin(0)
+        this.mountains = this.add.tileSprite(0, 0, 1919, 782, 'mountains').setOrigin(0)
+        this.plateau = this.add.tileSprite(0, 0, 1920, 751, 'plateau').setOrigin(0)
+        this.ground = this.add.tileSprite(0, 520, 1920, 198, 'ground').setOrigin(0)
+        this.plant = this.add.tileSprite(0, 540, 1689, 216, 'plant').setOrigin(0)
 
         // Temp Player
         this.player = new Player(this, game.config.width/10, game.config.height/2, 'dino').setOrigin(0, 0);
@@ -102,24 +77,10 @@ class Game extends Phaser.Scene{
             this.scene.restart();
         }
 
-
-
-        // Here's my proposal on how we do the world generation:
-        // We create prefab scenes that we then generate through code to appear in the game scene
-        // We can make like a set of obstacles, save it as a prefab, and have the game cycle through a set of them
-        // It'll definitely be the most difficult part of our project, and I'm not sure if I have the skills to tackle it
-        // Parallax scrolling
-        const cam = this.cameras.main
-        const speed = 10
-        const MIN_SPEED = 5
-        const MAX_SPEED = 20
-        
-        // These 3 lines have to be identical after the "=" sign in order to keep it looking nice
-        cam.scrollX += Phaser.Math.Clamp(speed, MIN_SPEED, MAX_SPEED)
-        this.player.x += Phaser.Math.Clamp(speed, MIN_SPEED, MAX_SPEED) //offsets camera, locking player in place
-        this.floor.x += Phaser.Math.Clamp(speed, MIN_SPEED, MAX_SPEED) //same thing for the floor
-        this.playerScoreDisplay.x += Phaser.Math.Clamp(speed, MIN_SPEED, MAX_SPEED)
-
+        this.mountains.tilePositionX += .25;
+        this.plateau.tilePositionX += .5;
+        this.ground.tilePositionX += 1;
+        this.plant.tilePositionX += 1.25;
         // Keyboard input! Has to be here and not in create() for some reason, not sure why
         let cursors = this.input.keyboard.createCursorKeys();
 
