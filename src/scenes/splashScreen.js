@@ -38,9 +38,12 @@ class splashScreen extends Phaser.Scene {
     update() {
         // Basic input controls go here
         // Click or Spacebar to start game
+        console.log('splash screen');
         this.input.on('pointerdown', function (pointer) {
             this.mouseClick.play();
             this.scene.start('gameScene');
         }, this);
+
+        
     }
 }

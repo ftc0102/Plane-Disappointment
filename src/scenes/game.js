@@ -29,9 +29,9 @@ class Game extends Phaser.Scene{
         this.interior = this.add.tileSprite(0, 0, 1280, 720, 'interior').setOrigin(0)
 
         // Temp Player
-        this.player = new Player(this, game.config.width/10, game.config.height/2, 'dino').setOrigin(0, 0);
-        this.player.anims.play('run');      // plays the running animation
-        this.player.setScale(8);            // makes the player bigger
+        this.player = new Player(this, game.config.width/10, game.config.height/2, 'chefsprite').setOrigin(0, 0);
+        this.player.anims.play('chef');      // plays the running animation
+        this.player.setScale(.2);            // makes the player bigger
 
         // have to create foreground after player 
         this.foreground = this.add.tileSprite(0, 0, 1280, 720, 'foreground').setOrigin(0)
@@ -102,7 +102,7 @@ class Game extends Phaser.Scene{
 
     jump(){
         if (this.player.body.onFloor()){
-            this.player.setVelocityY(-800); //allows the for the player to go up before gravity exists
+            this.player.setVelocityY(-700); //allows the for the player to go up before gravity exists
         }
     }
 
