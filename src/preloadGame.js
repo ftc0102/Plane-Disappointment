@@ -15,43 +15,25 @@ class preloadGame extends Phaser.Scene{
         this.load.image('foreground', './assets/background_4.png');
         this.load.image('suitcase', './assets/suitcase.png');
 
-        // temp atlas
-        this.load.atlas('chefsprite', './assets/spritesheet.png', './assets/sprites.json');
-
-
         // Mouse Click Sound
         this.load.audio('mouseClick', './assets/mouseClick2.ogg');
-        // Player temp art
-        //this.load.spritesheet('dino', './assets/dinoSprites.png', { frameWidth: 24, frameHeight: 24});
-        this.load.spritesheet('fa', './assets/flight_attendant_run.png', {frameWidth: 315, frameHeight:480});
+        
+        // Flight attendant texture atlas
+        this.load.atlas('fa', './assets/spritesheet.png', './assets/sprites.json');
+
         //temp bgm
         this.load.audio('backgroundMusic', './assets/bgm.mp3');
         
     }
     create(){
-           // dino animation
-        //    this.anims.create({
-        //     key: 'run',
-        //     frames: this.anims.generateFrameNumbers('dino', {start: 4, end: 9, first: 0}),
-        //     frameRate: 10,
-        //     repeat: -1
-        // });
-
-        this.anims.create({
-            key: 'chef',
-            frames: this.anims.generateFrameNames('chefsprite', { 
-                end: 40, 
-                prefix: 'ChefWalk-right-',
-                zeroPad: 2,
-                
-            }),
-            frameRate: 30,
-            repeat: -1
-        });
-
         this.anims.create({
             key: 'farun',
-            frames: this.anims.generateFrameNumbers('fa', {start: 0, end: 5, first: 0}),
+            frames: this.anims.generateFrameNames('fa', { 
+                start: 1,
+                end: 6, 
+                prefix: 'flight_attendant_run_',
+                zeroPad: 4    
+            }),
             frameRate: 10,
             repeat: -1
         });

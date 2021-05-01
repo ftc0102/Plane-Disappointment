@@ -28,7 +28,7 @@ class Game extends Phaser.Scene{
         this.ground = this.add.tileSprite(0, 0, 1280, 720, 'ground').setOrigin(0)
         this.interior = this.add.tileSprite(0, 0, 1280, 720, 'interior').setOrigin(0)
 
-        // Temp Player
+        // Instantiating Player
         this.player = new Player(this, game.config.width/10, game.config.height/4, 'fa').setOrigin(0, 0);
         this.player.anims.play('farun');      // plays the running animation
         this.player.setScale(0.9);            // makes the player bigger
