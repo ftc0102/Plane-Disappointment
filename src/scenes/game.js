@@ -27,12 +27,14 @@ class Game extends Phaser.Scene{
         this.witch = this.add.tileSprite(0, 0, 1280, 720, 'witch').setOrigin(0)
         this.ground = this.add.tileSprite(0, 0, 1280, 720, 'ground').setOrigin(0)
         this.interior = this.add.tileSprite(0, 0, 1280, 720, 'interior').setOrigin(0)
-        this.foreground = this.add.tileSprite(0, 540, 1280, 720, 'foreground').setOrigin(0)
 
         // Temp Player
         this.player = new Player(this, game.config.width/10, game.config.height/2, 'dino').setOrigin(0, 0);
         this.player.anims.play('run');      // plays the running animation
         this.player.setScale(8);            // makes the player bigger
+
+        // have to create foreground after player 
+        this.foreground = this.add.tileSprite(0, 0, 1280, 720, 'foreground').setOrigin(0)
         
         //gravity (credit to https://phasergames.com/how-to-jump-in-phaser-3/ for this section and the jump section)
         this.player.setGravityY(1500); //Makes the player go down by default
