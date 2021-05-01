@@ -35,7 +35,7 @@ class Game extends Phaser.Scene{
         this.player.setScale(8);            // makes the player bigger
         
         //gravity (credit to https://phasergames.com/how-to-jump-in-phaser-3/ for this section and the jump section)
-        this.player.setGravityY(600); //Makes the player go down by default
+        this.player.setGravityY(1500); //Makes the player go down by default
 
         // Variables for the floor creation
         let floorHorizontal = game.config.width/2;
@@ -100,7 +100,7 @@ class Game extends Phaser.Scene{
 
     jump(){
         if (this.player.body.onFloor()){
-            this.player.setVelocityY(-400); //allows the for the player to go up before gravity exists
+            this.player.setVelocityY(-800); //allows the for the player to go up before gravity exists
         }
     }
 
