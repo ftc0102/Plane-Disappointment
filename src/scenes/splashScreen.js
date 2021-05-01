@@ -32,15 +32,16 @@ class splashScreen extends Phaser.Scene {
 
         // sound for clicking
         this.mouseClick = this.sound.add('mouseClick');
+
+        this.input.on('pointerdown', function (pointer) {
+            this.mouseClick.play();
+            this.scene.start('gameScene');
+        }, this);
         
     }
 
     update() {
         // Basic input controls go here
         // Click or Spacebar to start game
-        this.input.on('pointerdown', function (pointer) {
-            this.mouseClick.play();
-            this.scene.start('gameScene');
-        }, this);
     }
 }

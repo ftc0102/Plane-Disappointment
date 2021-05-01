@@ -31,11 +31,7 @@ class Game extends Phaser.Scene{
         // Temp Player
         this.player = new Player(this, game.config.width/10, game.config.height/4, 'fa').setOrigin(0, 0);
         this.player.anims.play('farun');      // plays the running animation
-        this.player.setScale(0.75);            // makes the player bigger
-
-
-        // have to create foreground after player 
-        this.foreground = this.add.tileSprite(0, 0, 1280, 720, 'foreground').setOrigin(0)
+        this.player.setScale(0.9);            // makes the player bigger
         
         //gravity (credit to https://phasergames.com/how-to-jump-in-phaser-3/ for this section and the jump section)
         this.player.setGravityY(1500); //Makes the player go down by default
@@ -48,6 +44,18 @@ class Game extends Phaser.Scene{
         this.floor.displayWidth = game.config.width * 1.1; // makes it go across the screen
         this.physics.add.collider(this.player, this.floor); // allows for hit detection between player and floor
         this.floor.setPushable(false); //prevents floor from being moved by player
+
+        //suitcase group
+        this.suitcases = this.add.group([
+            {
+                key: 'suitcase', 
+                frame:0, 
+                repeat: 3, 
+                maxSize: 6,
+                setXY: {x:floorHorizontal, y:floorVertical*.90, stepX: 250}, 
+                setScale: {x:0.15, y:0.15}, 
+                setAlpha:{value:0}} //starts invisible
+        ]);
 
         // Mouse click to jump
         this.input.on('pointerdown', this.jump, this);
@@ -69,6 +77,9 @@ class Game extends Phaser.Scene{
         }
 
         this.playerScoreDisplay = this.add.text(0, 0, this.playerScoreValue, scoreConfig);
+
+        // have to create foreground last
+        this.foreground = this.add.tileSprite(0, 0, 1280, 720, 'foreground').setOrigin(0)
 
     }
 
