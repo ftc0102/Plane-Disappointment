@@ -6,11 +6,15 @@ class preloadGame extends Phaser.Scene{
         // Temp art for parallax background
         // Credit to MarwaMJ on Itch.io for assets
         // Credit to Ourcade on Youtube for tutorial https://www.youtube.com/watch?v=Y3C5HliTDwM
-        this.load.image('sky', './assets/sky.png');
-        this.load.image('mountains', './assets/mountains.png');
+        //this.load.image('sky', './assets/sky.png');
+        this.load.image('sky', './assets/background_0_5.png');
+        this.load.image('cloud', './assets/background_1.png');
+        this.load.image('witch', './assets/background_1_5.png');
         this.load.image('plateau', './assets/plateau.png');
-        this.load.image('ground', './assets/ground.png');
+        this.load.image('ground', './assets/background_2.png');
         this.load.image('plant', './assets/plant.png');
+
+
         
 
         // Mouse Click Sound
