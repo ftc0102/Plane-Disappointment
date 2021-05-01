@@ -13,6 +13,7 @@ class preloadGame extends Phaser.Scene{
         this.load.image('ground', './assets/background_2.png');
         this.load.image('interior', './assets/background_3.png');
         this.load.image('foreground', './assets/background_4.png');
+        this.load.image('suitcase', './assets/suitcase.png');
 
         // temp atlas
         this.load.atlas('chefsprite', './assets/spritesheet.png', './assets/sprites.json');
@@ -21,7 +22,8 @@ class preloadGame extends Phaser.Scene{
         // Mouse Click Sound
         this.load.audio('mouseClick', './assets/mouseClick2.ogg');
         // Player temp art
-        // this.load.spritesheet('dino', './assets/dinoSprites.png', { frameWidth: 24, frameHeight: 24});
+        //this.load.spritesheet('dino', './assets/dinoSprites.png', { frameWidth: 24, frameHeight: 24});
+        this.load.spritesheet('fa', './assets/flight_attendant_run.png', {frameWidth: 315, frameHeight:480});
         //temp bgm
         this.load.audio('backgroundMusic', './assets/bgm.mp3');
         
@@ -46,6 +48,14 @@ class preloadGame extends Phaser.Scene{
             frameRate: 30,
             repeat: -1
         });
+
+        this.anims.create({
+            key: 'farun',
+            frames: this.anims.generateFrameNumbers('fa', {start: 0, end: 5, first: 0}),
+            frameRate: 10,
+            repeat: -1
+        });
+
         this.scene.start("splashScreen");
     }
 }
