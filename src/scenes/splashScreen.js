@@ -4,11 +4,6 @@ class splashScreen extends Phaser.Scene {
         super("splashScreen");
     }
 
-    preload() {
-        // Load main menu assets here
-        // It can be cute art and music
-    }
-
     create() {
         // menu text configuration
         let menuConfig = {
@@ -24,11 +19,15 @@ class splashScreen extends Phaser.Scene {
             fixedWidth: 0
         }
 
+        // temp menuscreen art
+        this.add.image(game.config.width/2, game.config.height/2, 'menuscreen');
+
         // Temp Text
         this.add.text(game.config.width/2, game.config.height/2, 'PLANE DISAPPOINTMENT', menuConfig).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/2 + 50, 'COLLECT THE ITEMS IN THE AIR', menuConfig).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/2 + 100, 'AVOID THE OBSTACLES ON THE GROUND', menuConfig).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/2 + 150, 'LEFT CLICK TO PLAY AND JUMP', menuConfig).setOrigin(0.5);
+        
 
         // sound for clicking
         this.mouseClick = this.sound.add('mouseClick');
@@ -38,10 +37,5 @@ class splashScreen extends Phaser.Scene {
             this.scene.start('gameScene');
         }, this);
         
-    }
-
-    update() {
-        // Basic input controls go here
-        // Click or Spacebar to start game
     }
 }
