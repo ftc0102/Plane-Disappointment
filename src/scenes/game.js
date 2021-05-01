@@ -26,8 +26,8 @@ class Game extends Phaser.Scene{
         this.cloud = this.add.tileSprite(0, 0, 1280, 720, 'cloud').setOrigin(0)
         this.witch = this.add.tileSprite(0, 0, 1280, 720, 'witch').setOrigin(0)
         this.ground = this.add.tileSprite(0, 0, 1280, 720, 'ground').setOrigin(0)
-        this.plateau = this.add.tileSprite(0, 0, 1920, 751, 'plateau').setOrigin(0)
-        this.plant = this.add.tileSprite(0, 540, 1689, 216, 'plant').setOrigin(0)
+        this.interior = this.add.tileSprite(0, 0, 1280, 720, 'interior').setOrigin(0)
+        this.foreground = this.add.tileSprite(0, 540, 1280, 720, 'foreground').setOrigin(0)
 
         // Temp Player
         this.player = new Player(this, game.config.width/10, game.config.height/2, 'dino').setOrigin(0, 0);
@@ -83,8 +83,8 @@ class Game extends Phaser.Scene{
         this.cloud.tilePositionX += .25;
         this.witch.tilePositionX += .5;
         this.ground.tilePositionX += .75;
-        this.plateau.tilePositionX += .5;
-        this.plant.tilePositionX += 1.25;
+        this.interior.tilePositionX += 1;
+        this.foreground.tilePositionX += 1.25;
 
         // Keyboard input! Has to be here and not in create() for some reason, not sure why
         let cursors = this.input.keyboard.createCursorKeys();

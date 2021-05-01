@@ -10,9 +10,9 @@ class preloadGame extends Phaser.Scene{
         this.load.image('sky', './assets/background_0_5.png');
         this.load.image('cloud', './assets/background_1.png');
         this.load.image('witch', './assets/background_1_5.png');
-        this.load.image('plateau', './assets/plateau.png');
         this.load.image('ground', './assets/background_2.png');
-        this.load.image('plant', './assets/plant.png');
+        this.load.image('interior', './assets/background_3.png');
+        this.load.image('foreground', './assets/background_4.png');
 
 
         
