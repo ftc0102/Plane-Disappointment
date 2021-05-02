@@ -5,29 +5,9 @@ class splashScreen extends Phaser.Scene {
     }
 
     create() {
-        // menu text configuration
-        let menuConfig = {
-            fontFamily: 'Comic Sans MS',
-            fontSize: '28px',
-            backgroundColor: '#F3B141',
-            color: '#843605',
-            align: 'right',
-            padding: {
-                top: 5,
-                bottom: 5,
-            },
-            fixedWidth: 0
-        }
-
-        // temp menuscreen art
-        this.add.image(game.config.width/2, game.config.height/2, 'menuscreen');
-
-        // Temp Text
-        this.add.text(game.config.width/2, game.config.height/2, 'PLANE DISAPPOINTMENT', menuConfig).setOrigin(0.5);
-        this.add.text(game.config.width/2, game.config.height/2 + 50, 'COLLECT THE ITEMS IN THE AIR', menuConfig).setOrigin(0.5);
-        this.add.text(game.config.width/2, game.config.height/2 + 100, 'AVOID THE OBSTACLES ON THE GROUND', menuConfig).setOrigin(0.5);
-        this.add.text(game.config.width/2, game.config.height/2 + 150, 'LEFT CLICK TO PLAY AND JUMP', menuConfig).setOrigin(0.5);
-        
+        // menuscreen art
+        // credits to Måns Grebäck from fontspace.com for use of the Aeronaves Font
+        this.menuscreen = this.add.image(game.config.width/2, game.config.height/2, 'menuscreen');
 
         // sound for clicking
         this.mouseClick = this.sound.add('mouseClick');

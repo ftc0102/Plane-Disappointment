@@ -16,7 +16,7 @@ class preloadGame extends Phaser.Scene{
         this.load.image('suitcase', './assets/suitcase.png');
 
         // menuscreen
-        this.load.image('menuscreen', './assets/menuscreen.png');
+        this.load.image('menuscreen', './assets/menuscreen.jpg');
 
         // Mouse Click Sound
         this.load.audio('mouseClick', './assets/mouseClick2.ogg');
@@ -24,7 +24,7 @@ class preloadGame extends Phaser.Scene{
         // Flight attendant texture atlas
         this.load.atlas('fa', './assets/spritesheet.png', './assets/sprites.json');
 
-        //temp bgm
+        // bgm
         this.load.audio('backgroundMusic', './assets/bgm.mp3');
         
     }
