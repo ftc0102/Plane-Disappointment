@@ -35,3 +35,6 @@ let bgMusic;
 
 // Added keyR for restart game
 let keyR;
+
+//debug - press D to get game over
+let keyD;

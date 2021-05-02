@@ -3,10 +3,14 @@ class Game extends Phaser.Scene{
         super("gameScene");
     }
 
+    init(data) {
+        this.info = data; //grab the high score details from previous scene
+    }
+
     // ALL PRELOADS HAVE BEEN MOVED TO PRELOADGAME.JS 
     create() {
 
-        console.log("entering create()");
+        //console.log("entering create()");
 
         if (!bgMusic) {
             bgMusic = this.sound.add('backgroundMusic', { volume: 0.3 });
@@ -17,6 +21,7 @@ class Game extends Phaser.Scene{
 
         // Define restart key
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
+        keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
 
         // Parallax pieces
         // The last 2 integers are the dimensions of the image, make sure to set the correct ones.
@@ -77,6 +82,7 @@ class Game extends Phaser.Scene{
         }
 
         this.playerScoreDisplay = this.add.text(0, 0, this.playerScoreValue, scoreConfig);
+        this.highScoreDisplay = this.add.text(1000, 0, '', scoreConfig);
 
         // have to create foreground last
         this.foreground = this.add.tileSprite(0, 0, 1280, 720, 'foreground').setOrigin(0)
@@ -85,20 +91,38 @@ class Game extends Phaser.Scene{
 
     update() {
 
+        if(Phaser.Input.Keyboard.JustDown(keyD)) {
+            this.gameOver = true;
+        }
+
+        //update high score when game over
+        if (this.gameOver) {
+            this.add.image(game.config.width/2, game.config.height/2, 'gameOverScreen');
+            
+            if(this.playerScoreValue > this.info.highestScore) {
+                this.info.highestScore = this.playerScoreValue;
+                console.log('the latest high score is ' + this.info.highestScore);
+            }
+            this.highScoreDisplay.text = this.info.highestScore;  
+        } else { //if the game is not over yet
+            this.sky.tilePositionX += .1;
+            this.cloud.tilePositionX += .25;
+            this.witch.tilePositionX += .5;
+            this.ground.tilePositionX += 1.25;
+            this.interior.tilePositionX += 1.75;
+            this.foreground.tilePositionX += 2;
+        }
+
+
         // Game Over & Restart
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)){
-            this.scene.restart();
+            this.scene.restart(this.info);
         }
 
         // Change these values to change how fast the parallax effect occurs
         // Note that the sky is not here. If you want the sky to parallax, include an
         // identical line of code that is the same as those below this.
-        this.sky.tilePositionX += .1;
-        this.cloud.tilePositionX += .25;
-        this.witch.tilePositionX += .5;
-        this.ground.tilePositionX += 1.25;
-        this.interior.tilePositionX += 1.75;
-        this.foreground.tilePositionX += 2;
+
 
         // Keyboard input! Has to be here and not in create() for some reason, not sure why
         let cursors = this.input.keyboard.createCursorKeys();
@@ -113,7 +137,7 @@ class Game extends Phaser.Scene{
     }
 
     jump(){
-        if (this.player.body.onFloor()){
+        if (this.player.body.onFloor() && !this.gameOver){
             this.player.setVelocityY(-700); //allows the for the player to go up before gravity exists
 
             // Currently putting this in jump so I have the code here. This currently counts score and increments by 1.
@@ -128,5 +152,6 @@ class Game extends Phaser.Scene{
             // Change collision box
         pass // delete this when the function is made
     }
+
 
 }
