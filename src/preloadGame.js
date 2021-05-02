@@ -37,7 +37,7 @@ class preloadGame extends Phaser.Scene{
                 prefix: 'flight_attendant_run_',
                 zeroPad: 4    
             }),
-            frameRate: 10,
+            frameRate: 8,
             repeat: -1
         });
 
