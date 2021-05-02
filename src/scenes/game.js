@@ -96,9 +96,9 @@ class Game extends Phaser.Scene{
         this.sky.tilePositionX += .1;
         this.cloud.tilePositionX += .25;
         this.witch.tilePositionX += .5;
-        this.ground.tilePositionX += .75;
-        this.interior.tilePositionX += 1;
-        this.foreground.tilePositionX += 1.25;
+        this.ground.tilePositionX += 1.25;
+        this.interior.tilePositionX += 1.75;
+        this.foreground.tilePositionX += 2;
 
         // Keyboard input! Has to be here and not in create() for some reason, not sure why
         let cursors = this.input.keyboard.createCursorKeys();
@@ -115,6 +115,10 @@ class Game extends Phaser.Scene{
     jump(){
         if (this.player.body.onFloor()){
             this.player.setVelocityY(-700); //allows the for the player to go up before gravity exists
+
+            // Currently putting this in jump so I have the code here. This currently counts score and increments by 1.
+            this.playerScoreValue += 1;
+            this.playerScoreDisplay.text = this.playerScoreValue;
         }
     }
 
