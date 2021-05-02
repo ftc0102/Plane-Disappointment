@@ -4,7 +4,14 @@ class getPlayerInfo extends Phaser.Scene {
         super("playerInfoScreen");
     }
 
+    init(data) {
+        this.info = data; //grab the high score details from previous scene
+    }
+
     create () {
+
+        this.mouseClick = this.sound.add('mouseClick');
+
         var playerName = this.add.text(10, 10, 'Enter your name:', { font: '32px Courier', fill: '#ffffff' });
     
         var playerInput = this.add.text(10, 50, '', { font: '32px Courier', fill: '#ffff00' });
@@ -32,5 +39,12 @@ class getPlayerInfo extends Phaser.Scene {
                 playerName.setText(playerInput.value);
             }
         });
+
+        this.input.on('pointerdown', function (pointer) {
+            this.mouseClick.play();
+            this.scene.start('gameScene', this.info);
+        }, this);
+
+
     }  
 }
