@@ -14,6 +14,9 @@ let config = {
     // We can fiddle with the width and height later
     width: 1280,
     height: 720,
+    dom: {
+        createContainer: true
+    },
     physics: {
         default: 'arcade',
         arcade: {
@@ -24,7 +27,7 @@ let config = {
             }
         }
     },
-    scene: [preloadGame, splashScreen, Game],
+    scene: [preloadGame, splashScreen, getPlayerInfo, Game],
 }
 
 let game = new Phaser.Game(config);
