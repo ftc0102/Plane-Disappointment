@@ -29,17 +29,23 @@ class getPlayerInfo extends Phaser.Scene {
             They type in and hit enter, then the game begins
         */
 
-            if (event.keyCode === 8 && playerInput.text.length > 0) {
-                playerInput.text = playerInput.text.substr(0, playerInput.text.length - 1);
+            //A document that explains each unique keycode: https://github.com/photonstorm/phaser/blob/v3.51.0/src/input/keyboard/keys/KeyCodes.js 
+
+            if (event.keyCode === 8 && playerInput.text.length > 0) { //this is the backspace key; 8 = backspace
+                playerInput.text = playerInput.text.substr(0, playerInput.text.length - 1); //delete input
             }
-            else if (event.keyCode === 32 || (event.keyCode >= 48 && event.keyCode < 90)) {
-                playerInput.text += event.key;
+            else if (event.keyCode === 32 || (event.keyCode >= 48 && event.keyCode < 90)) { // this is the space key
+                playerInput.text += event.key; 
             }
-            if (event.keyboard == 18){
+
+            /*
+            if (event.keyboard == 18){ // this is the alt key
                 playerName.setText(playerInput.value);
             }
+            */
         });
-
+        
+        // for debug purposes, when you mouse click, it brings you to the game scene
         this.input.on('pointerdown', function (pointer) {
             this.mouseClick.play();
             this.scene.start('gameScene', this.info);
