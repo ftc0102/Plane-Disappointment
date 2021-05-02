@@ -14,7 +14,8 @@ class splashScreen extends Phaser.Scene {
 
         this.input.on('pointerdown', function (pointer) {
             this.mouseClick.play();
-            this.scene.start('playerInfoScreen');
+            this.scene.start('gameScene');
+            //this.scene.start('playerInfoScreen');
         }, this);
         
     }

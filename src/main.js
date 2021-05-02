@@ -35,3 +35,6 @@ let bgMusic;
 
 // Added keyR for restart game
 let keyR;
+
+let floorHorizontal = game.config.width/2;
+let floorVertical = game.config.height * .90;

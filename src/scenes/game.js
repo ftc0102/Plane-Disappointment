@@ -5,9 +5,6 @@ class Game extends Phaser.Scene{
 
     // ALL PRELOADS HAVE BEEN MOVED TO PRELOADGAME.JS 
     create() {
-
-        console.log("entering create()");
-
         if (!bgMusic) {
             bgMusic = this.sound.add('backgroundMusic', { volume: 0.3 });
             bgMusic.play({
@@ -36,26 +33,29 @@ class Game extends Phaser.Scene{
         //gravity (credit to https://phasergames.com/how-to-jump-in-phaser-3/ for this section and the jump section)
         this.player.setGravityY(1500); //Makes the player go down by default
 
-        // Variables for the floor creation
-        let floorHorizontal = game.config.width/2;
-        let floorVertical = game.config.height * .90;
         // Floor creation
         this.floor = this.physics.add.sprite(floorHorizontal, floorVertical); //makes a floor for player to rest
         this.floor.displayWidth = game.config.width * 1.1; // makes it go across the screen
-        this.physics.add.collider(this.player, this.floor); // allows for hit detection between player and floor
+        this.grav = this.physics.add.collider(this.player, this.floor); // allows for hit detection between player and floor
         this.floor.setPushable(false); //prevents floor from being moved by player
 
         //suitcase group
-        this.suitcases = this.add.group([
+        this.suitcaseGroup = this.add.group([
             {
-                key: 'suitcase', 
-                frame:0, 
-                repeat: 3, 
-                maxSize: 6,
-                setXY: {x:floorHorizontal, y:floorVertical*.90, stepX: 250}, 
-                setScale: {x:0.15, y:0.15}, 
-                setAlpha:{value:0}} //starts invisible
+                setScale: {x: .1, y: .1},
+                runChildUpdate:true
+            }
         ]);
+
+        //physics with suitcase group
+        this.physics.world.collide(this.player, this.suitcaseGroup, () =>
+        {
+            if(!this.gameOver){
+                this.player.anims.stop();
+                this.physics.world.removeCollider(this.grav);
+                this.gameOver = true;
+            }
+        })
 
         // Mouse click to jump
         this.input.on('pointerdown', this.jump, this);
@@ -78,13 +78,14 @@ class Game extends Phaser.Scene{
 
         this.playerScoreDisplay = this.add.text(0, 0, this.playerScoreValue, scoreConfig);
 
+        this.makeSuitcase();
+
         // have to create foreground last
-        this.foreground = this.add.tileSprite(0, 0, 1280, 720, 'foreground').setOrigin(0)
+        this.foreground = this.add.tileSprite(0, 0, 1280, 720, 'foreground').setOrigin(0);
 
     }
 
     update() {
-
         // Game Over & Restart
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)){
             this.scene.restart();
@@ -127,6 +128,15 @@ class Game extends Phaser.Scene{
             // Change animation
             // Change collision box
         pass // delete this when the function is made
+    }
+
+    makeSuitcase(){
+        this.suitcaseGroup.add(new Suitcase(
+            this,
+            floorHorizontal*1.5,
+            floorVertical*.95,
+            "suitcase",
+            0));
     }
 
 }
