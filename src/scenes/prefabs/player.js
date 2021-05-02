@@ -8,5 +8,5 @@ class Player extends Phaser.Physics.Arcade.Sprite{
     }
 
     // ALL PRELOADS HAVE BEEN MOVED TO PRELOADGAME.JS 
-    
+
 }
