@@ -16,6 +16,7 @@ class getName extends Phaser.Scene {
         this.mouse = this.input.activePointer;
 
         typingSound = this.sound.add('playerTypingNoise');
+        errorSound = this.sound.add('sfx_error', { volume: 0.4 });
         this.airplaneBeep = this.sound.add("airplaneBeep");
         this.mouseClick = this.sound.add('mouseClick');
         this.inputBG_1 = this.add.image(0, 0, 'input_1').setOrigin(0,0);
@@ -31,8 +32,10 @@ class getName extends Phaser.Scene {
             if (event.keyCode === 8 && playerInput.text.length > 0) { //this is the backspace key; to delete the typed text from playerInput.text string
                 typingSound.play();
                 playerInput.text = playerInput.text.substr(0, playerInput.text.length - 1);
-            } else if (playerInput.text.length >= 20) { //if it's too long, it won't insert more input
-                console.log('too long');
+            } else if (playerInput.text.length >= 14) { //if it's too long, it won't insert more input
+                //console.log('too long');
+                errorSound.play();
+
             } else if (event.keyCode === 32 || (event.keyCode >= 48 && event.keyCode <= 90)) { // this is to add space and all upper and lower captial letters to the playerInput.text string
                 typingSound.play();
                 playerInput.text += event.key; 

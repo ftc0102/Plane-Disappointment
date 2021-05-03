@@ -39,6 +39,9 @@ class preloadGame extends Phaser.Scene{
 
         // Airplane beep
         this.load.audio('airplaneBeep', './assets/airplaneBeep.mp3');
+
+        //error sound
+        this.load.audio('sfx_error', './assets/error.wav');
         
     }
     create(){

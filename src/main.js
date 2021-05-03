@@ -10,10 +10,15 @@
 // Date Completed: 3 May 2021
 // Creative Tilt: 
 //
-// Emily is quite happy with her randomization implementation for the suitcases and soda
+//   In terms of technicality:
+//     Emily is quite happy with her randomization implementation for the suitcases and soda.
+//     Fion is realy satisfied with the two player info screens that are able to: let players type text on the screen, save player inputs, and call them out in the game over scene.
 // 
-// Our game has very defined aesthetics, with the setpiece of an airplane tying our game 
-// Due to having a very art-leaning team, we tried to maximize the aesthetic aspects of our game
+//   In terms of aesthetics:
+//     Our game has very defined aesthetics, with the setpiece of an airplane tying our game. 
+//     Due to having a very art-leaning team, we tried to maximize the aesthetic aspects of our game.
+//     We also tried our best to provide an immersive experience to players.
+//     It was a bit hard to create an "endless plane" environment but the results were rewarding.
 
 let config = {
     type: Phaser.CANVAS,
@@ -40,6 +45,7 @@ let game = new Phaser.Game(config);
 let bgMusic;
 let infoMusic;
 let typingSound;
+let errorSound;
 
 // Added keyR for restart game
 let keyR;
