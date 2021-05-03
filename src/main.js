@@ -27,7 +27,7 @@ let config = {
             }
         }
     },
-    scene: [preloadGame, splashScreen, getPlayerInfo, getLocation, Game],
+    scene: [preloadGame, splashScreen, getName, getLocation, Game],
 }
 
 let game = new Phaser.Game(config);
@@ -45,4 +45,17 @@ let info = {
     highestScore: 0,
     name: 'Bob',
     arrivingLocation: 'New York'
+}
+
+// font config for info screens
+let infoConfig = {
+    fill: '#ffff00',
+    fontFamily: 'pixelFont',
+    fontSize: '28px',
+    align: 'left',
+    padding: {
+        top: 5,
+        bottom: 5,
+    },
+    //fixedWidth: 100
 }

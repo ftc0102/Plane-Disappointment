@@ -1,15 +1,15 @@
-class getPlayerInfo extends Phaser.Scene {
+class getName extends Phaser.Scene {
     constructor() {
-        super("playerInfoScreen");
+        super("playerNameScreen");
     }
 
     create () {
 
         this.mouseClick = this.sound.add('mouseClick');
 
-        this.add.text(10, 10, 'Enter your name: \nClick to Proceed', { font: '32px Courier', fill: '#ffffff' });
+        this.add.text(10, 10, 'Enter your name: \nClick to Proceed', infoConfig);
     
-        var playerInput = this.add.text(10, game.config.height/2, '', { font: '32px Courier', fill: '#ffff00' });
+        var playerInput = this.add.text(10, game.config.height/2, '', infoConfig);
     
         this.input.keyboard.on('keydown', function (event) {
 

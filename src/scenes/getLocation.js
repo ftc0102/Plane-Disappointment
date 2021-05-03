@@ -7,9 +7,9 @@ class getLocation extends Phaser.Scene {
 
         this.mouseClick = this.sound.add('mouseClick');
 
-        this.add.text(10, 10, 'Security Question \nEnter the city you are flying today: \nClick to Proceed', { font: '32px Courier', fill: '#ffffff' });
+        this.add.text(10, 10, 'Security Question \nEnter the city you are flying today: \nClick to Proceed', infoConfig);
     
-        var playerInputLocation = this.add.text(10, game.config.height/2, '', { font: '32px Courier', fill: '#ffff00' });
+        var playerInputLocation = this.add.text(10, game.config.height/2, '', infoConfig);
     
         this.input.keyboard.on('keydown', function (event) {
 
@@ -21,7 +21,7 @@ class getLocation extends Phaser.Scene {
             else if (event.keyCode === 32 || (event.keyCode >= 48 && event.keyCode <= 90)) {   // this is to add space and all upper and lower captial letters to the input string
                 playerInputLocation.text += event.key; 
                 info.arrivingLocation = playerInputLocation.text;
-                console.log(info.name + '\'s is going to ' + info.arrivingLocation); //debug
+                console.log(info.name + ' is going to ' + info.arrivingLocation); //debug
 
             }
 
