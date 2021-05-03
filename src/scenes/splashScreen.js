@@ -8,10 +8,11 @@ class splashScreen extends Phaser.Scene {
         this.info = data;
         if(this.info.highestScore == null) { //if there is not a score already
             this.info.highestScore = 0; //set highscore to 0
-            this.name = 'Bob';
-            this.departingLocation = 'San Francisco';
-            this.arrivingLocation = 'New York';
-            console.log('high score in Menu: ' + this.info.highestScore + '. Player name is ' + this.name + ' and they are from ' + this.departingLocation + ' and are going to ' + this.arrivingLocation);
+            this.info.name = 'Bob';
+            this.info.departingLocation = 'San Francisco';
+            this.info.arrivingLocation = 'New York';
+            console.log('high score in Menu: ' + this.info.highestScore + '. Player name is ' + this.info.name + 
+            '. They are from ' + this.info.departingLocation + ' and are going to ' + this.info.arrivingLocation);
         }
 
 
