@@ -13,7 +13,8 @@ class preloadGame extends Phaser.Scene{
         this.load.image('ground', './assets/background_2.png');
         this.load.image('interior', './assets/background_3.png');
         this.load.image('foreground', './assets/background_4.png');
-        this.load.image('suitcase', './assets/suitcase3.png');
+        this.load.image('suitcase', './assets/suitcase.png');
+        this.load.image('gameOverScreen', './assets/gameOverTicket.png');
 
         // menuscreen
         this.load.image('menuscreen', './assets/menuscreen.jpg');
