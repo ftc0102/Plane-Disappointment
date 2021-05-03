@@ -3,6 +3,7 @@ class Suitcase extends Phaser.Physics.Arcade.Sprite {
         super(scene, x, y, texture, frame);
         scene.add.existing(this); 
         scene.physics.add.existing(this);
+        this.body.setSize(50, 50);
     }
 
     create(){
@@ -11,6 +12,7 @@ class Suitcase extends Phaser.Physics.Arcade.Sprite {
     update(){
         if(this.x < -this.width){
             this.destroy();
+            console.log("I'm dead!");
         }
     }
 }

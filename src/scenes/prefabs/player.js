@@ -4,7 +4,7 @@ class Player extends Phaser.Physics.Arcade.Sprite{
 
         scene.add.existing(this);
         scene.physics.add.existing(this);
-        //this.JUMP_IMPULSE = -500;
+        //this.setoffset(45, 0);
     }
 
     // ALL PRELOADS HAVE BEEN MOVED TO PRELOADGAME.JS 

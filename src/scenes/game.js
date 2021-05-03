@@ -37,6 +37,7 @@ class Game extends Phaser.Scene{
         this.player = new Player(this, game.config.width/10, game.config.height/4, 'fa').setOrigin(0, 0);
         this.player.anims.play('farun');      // plays the running animation
         this.player.setScale(0.9);            // makes the player bigger
+        this.player.body.setSize(150,380); //warps hitbox
         
         //gravity (credit to https://phasergames.com/how-to-jump-in-phaser-3/ for this section and the jump section)
         this.player.setGravityY(1500); //Makes the player go down by default
@@ -50,20 +51,20 @@ class Game extends Phaser.Scene{
         //suitcase group
         this.suitcaseGroup = this.add.group([
             {
-                setScale: {x: .1, y: .1},
                 runChildUpdate:true
             }
         ]);
 
         //physics with suitcase group
-        this.physics.world.collide(this.player, this.suitcaseGroup, () =>
+        this.physics.add.overlap(this.player, this.suitcaseGroup, function(player, suitcase)
         {
+            this.player.anims.stop();
+            this.physics.world.removeCollider(this.grav);
             if(!this.gameOver){
-                this.player.anims.stop();
-                this.physics.world.removeCollider(this.grav);
-                this.gameOver = true;
+                this.player.body.setVelocityY(-200);
             }
-        })
+            this.gameOver = true;
+        }, null, this)
 
         // Mouse click to jump
         this.input.on('pointerdown', this.jump, this);
@@ -87,7 +88,7 @@ class Game extends Phaser.Scene{
         this.playerScoreDisplay = this.add.text(0, 0, this.playerScoreValue, scoreConfig);
         this.highScoreDisplay = this.add.text(1000, 0, '', scoreConfig);
 
-        this.makeSuitcase();
+        this.makeSuitcase(); //spawn suitcase
 
         // have to create foreground last
         this.foreground = this.add.tileSprite(0, 0, 1280, 720, 'foreground').setOrigin(0);
@@ -95,6 +96,16 @@ class Game extends Phaser.Scene{
     }
 
     update() {
+        //the conditions for making a suitcase
+        //right now i set it to 4 jumps
+        //ideally we'll base it on random timer callse but for now here we go
+        if (this.playerScoreValue == 4){
+            this.makeSuitcase();
+            this.playerScoreValue += 1;
+        }
+
+        //move suitcase towards player
+        Phaser.Actions.IncX(this.suitcaseGroup.getChildren(), -5);
 
         if(Phaser.Input.Keyboard.JustDown(keyD)) {
             this.gameOver = true;
@@ -143,7 +154,7 @@ class Game extends Phaser.Scene{
 
     jump(){
         if (this.player.body.onFloor() && !this.gameOver){
-            this.player.setVelocityY(-700); //allows the for the player to go up before gravity exists
+            this.player.setVelocityY(-800); //allows the for the player to go up before gravity exists
 
             // Currently putting this in jump so I have the code here. This currently counts score and increments by 1.
             this.playerScoreValue += 1;
