@@ -12,12 +12,14 @@
 //
 //   In terms of technicality:
 //     Emily is quite happy with her randomization implementation for the suitcases and soda.
-//     Fion is realy satisfied with the two player info screens that are able to: let players type text on the screen, save player inputs, and call them out in the game over scene.
+//     We also implemented the two player info screens that are able to: let players type text on the screen, save player inputs, 
+//     and call them out in the game over scene. Although we are not experienced in programming, we still wanted to
+//     provide an immersive experience to players with codes.
 // 
 //   In terms of aesthetics:
 //     Our game has very defined aesthetics, with the setpiece of an airplane tying our game. 
 //     Due to having a very art-leaning team, we tried to maximize the aesthetic aspects of our game.
-//     We also tried our best to provide an immersive experience to players.
+//     We also 
 //     It was a bit hard to create an "endless plane" environment but the results were rewarding.
 
 let config = {
