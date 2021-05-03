@@ -114,7 +114,24 @@ class Game extends Phaser.Scene{
 
     }
 
-    update() {
+    update(time, delta) {
+        //update event timers
+        suitcaseTimer += delta;
+        sodaTimer += delta;
+
+        //right now, they spawn periodically
+        //to make it random all i'll have to do is change the num in the while statements to a random number
+
+        while (suitcaseTimer >= 2000){
+            this.makeSuitcase();
+            suitcaseTimer -= 2000;
+        }
+
+        while (sodaTimer >= 3000){
+            this.makeSoda();
+            sodaTimer -= 3000;
+        }
+
         //update score
         this.playerScoreDisplay.text = this.playerScoreValue;
 
@@ -130,19 +147,21 @@ class Game extends Phaser.Scene{
         }
 
         //run despawn check
-        this.suitcaseGroup.children.iterate(function(suitcase){
-            if(suitcase.x < 0){
-                suitcase.die();
+        let arrSuit=this.suitcaseGroup.getChildren();
+        for (let i=0; i<arrSuit.length; i++){
+            if (arrSuit[i].x < 0){
+                arrSuit[i].die();
                 console.log("suitcase despawned");
             }
-        });
+        }
 
-        this.suitcaseGroup.children.iterate(function(soda){
-            if(soda.x < 0){
-                soda.die();
+        let arrSoda=this.sodaGroup.getChildren();
+        for (let i=0; i<arrSoda.length; i++){
+            if (arrSoda[i].x < 0){
+                arrSoda[i].die();
                 console.log("soda despawned");
             }
-        });
+        }
 
         if(Phaser.Input.Keyboard.JustDown(keyD)) {
             this.gameOver = true;
