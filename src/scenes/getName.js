@@ -21,7 +21,7 @@ class getName extends Phaser.Scene {
     
         var playerInput = this.add.text(game.config.width/4, game.config.height/2, '', answerConfig);
     
-        this.input.keyboard.on('keydown', function (event) {
+        this.input.keyboard.on('keydown', function (event) { //keyboard input code credits from: https://phaser.io/examples/v3/view/input/keyboard/text-entry
             
             //A document that explains each unique keycode: https://github.com/photonstorm/phaser/blob/v3.51.0/src/input/keyboard/keys/KeyCodes.js 
             

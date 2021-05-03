@@ -20,26 +20,10 @@ class getLocation extends Phaser.Scene {
         this.airplaneBeep = this.sound.add("airplaneBeep");
         this.mouseClick = this.sound.add('mouseClick');
         this.inputBG_2 = this.add.image(0, 0, 'input_2').setOrigin(0,0);
-
-        // font config for info screens
-        let infoConfig2 = {
-            fill: '#4F3421',
-            fontFamily: 'pixelFont',
-            fontSize: '50px',
-            align: 'left',
-            padding: {
-                top: 5,
-                bottom: 5,
-                right: 400
-            }
-            //fixedWidth: 1280
-        }
-
-        //this.add.text(10, 10, 'Security Question \nEnter the city you are flying today: \nClick to Proceed', infoConfig2);
     
         var playerInputLocation = this.add.text(game.config.width/4, game.config.height/1.75, '', answerConfig);
     
-        this.input.keyboard.on('keydown', function (event) {
+        this.input.keyboard.on('keydown', function (event) { //keyboard input code credits from: https://phaser.io/examples/v3/view/input/keyboard/text-entry
 
             //A document that explains each unique keycode: https://github.com/photonstorm/phaser/blob/v3.51.0/src/input/keyboard/keys/KeyCodes.js 
             

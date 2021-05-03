@@ -6,8 +6,6 @@ class Game extends Phaser.Scene{
     // ALL PRELOADS HAVE BEEN MOVED TO PRELOADGAME.JS 
     create() {
 
-        //console.log("entering create()");
-
         if (!bgMusic) {
             bgMusic = this.sound.add('backgroundMusic', { volume: 0.3 });
             bgMusic.play({
@@ -32,11 +30,11 @@ class Game extends Phaser.Scene{
         // The last 2 integers are the dimensions of the image, make sure to set the correct ones.
         // The first 2 integers are the X, Y coordinates
         // The string is the name of the asset, declared in preloadGame.js
-        this.sky = this.add.tileSprite(0, 0, 1280, 720, 'sky').setOrigin(0)
-        this.cloud = this.add.tileSprite(0, 0, 1280, 720, 'cloud').setOrigin(0)
-        this.witch = this.add.tileSprite(0, 0, 1280, 720, 'witch').setOrigin(0)
-        this.ground = this.add.tileSprite(0, 0, 1280, 720, 'ground').setOrigin(0)
-        this.interior = this.add.tileSprite(0, 0, 1280, 720, 'interior').setOrigin(0)
+        this.sky = this.add.tileSprite(0, 0, 1280, 720, 'sky').setOrigin(0);
+        this.cloud = this.add.tileSprite(0, 0, 1280, 720, 'cloud').setOrigin(0);
+        this.witch = this.add.tileSprite(0, 0, 1280, 720, 'witch').setOrigin(0);
+        this.ground = this.add.tileSprite(0, 0, 1280, 720, 'ground').setOrigin(0);
+        this.interior = this.add.tileSprite(0, 0, 1280, 720, 'interior').setOrigin(0);
 
         // Instantiating Player
         this.player = new Player(this, game.config.width/10, game.config.height/4, 'fa').setOrigin(0, 0);
@@ -148,7 +146,7 @@ class Game extends Phaser.Scene{
 
         if(Phaser.Input.Keyboard.JustDown(keyD)) {
             this.gameOver = true;
-            this.playerScoreValue += 1;
+            //this.playerScoreValue += 1;
         }
 
         //update high score when game over
@@ -158,7 +156,7 @@ class Game extends Phaser.Scene{
 
 
             if(this.playerScoreValue > info.highestScore) {
-                info.highestScore = this.playerScoreValue - 1;   //for now I subtracted 1 from it since it is needed for the suitcase condition
+                info.highestScore = this.playerScoreValue; 
                 //console.log(info.name + '\'s latest high score is ' + info.highestScore);
                 //console.log('they are going to ' + info.arrivingLocation);
             }
