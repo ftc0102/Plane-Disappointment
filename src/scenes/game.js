@@ -110,7 +110,7 @@ class Game extends Phaser.Scene{
         this.physics.add.overlap(this.player, this.suitcaseGroup, function(player, suitcase)
         {
             // camera shake when player touches suitcase
-            this.cameras.main.shake(100, 0.02);
+            this.cameras.main.shake(150, 0.001);
             this.player.anims.stop();
             this.physics.world.removeCollider(this.grav);
             if(!this.gameOver){
@@ -217,6 +217,7 @@ class Game extends Phaser.Scene{
 
         //game over screen
         if (this.gameOver) {
+            //the game over ticket and info visibility
             this.gameOverTicket.visible = true;
             this.nameDisplay1.visible = true;
             this.nameDisplay2.visible = true;

@@ -24,22 +24,22 @@ class getLocation extends Phaser.Scene {
         this.mouseClick = this.sound.add('mouseClick');
         this.inputBG_2 = this.add.image(0, 0, 'input_2').setOrigin(0,0);
     
-        playerInputLocation = this.add.text(game.config.width/4, game.config.height/1.75, '', answerConfig);
+        playerInputLocation = this.add.text(200, 389, '', answerConfig);
     
         this.input.keyboard.on('keydown', function (event) { //keyboard input code credits from: https://phaser.io/examples/v3/view/input/keyboard/text-entry
 
             //A document that explains each unique keycode: https://github.com/photonstorm/phaser/blob/v3.51.0/src/input/keyboard/keys/KeyCodes.js 
             
-            if (event.keyCode === 8 && playerInputLocation.text.length > 0) {   //this is the backspace key; to delete the typed text from playerInput.text string
+            if (event.keyCode === 8 && playerInput.text.length > 0) { //this is the backspace key; to delete the typed text from playerInput.text string
                 typingSound.play();
-                playerInputLocation.text = playerInputLocation.text.substr(0, playerInputLocation.text.length - 1); //delete input
-            }
-            else if (event.keyCode === 32 || (event.keyCode >= 48 && event.keyCode <= 90)) {   // this is to add space and all upper and lower captial letters to the input string
+                playerInput.text = playerInput.text.substr(0, playerInput.text.length - 1);
+            } else if (playerInput.text.length >= 20) { //if it's too long, it won't insert more input
+                console.log('too long');
+            } else if (event.keyCode === 32 || (event.keyCode >= 48 && event.keyCode <= 90)) { // this is to add space and all upper and lower captial letters to the playerInput.text string
                 typingSound.play();
-                playerInputLocation.text += event.key; 
-                info.arrivingLocation = playerInputLocation.text;
-                console.log(info.name + ' is going to ' + info.arrivingLocation); //debug
-
+                playerInput.text += event.key; 
+                info.name = playerInput.text;
+                console.log('player name is ' + info.name); //debug
             }
 
         });
