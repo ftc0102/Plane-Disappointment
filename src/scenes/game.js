@@ -58,6 +58,8 @@ class Game extends Phaser.Scene{
         //physics with suitcase group
         this.physics.add.overlap(this.player, this.suitcaseGroup, function(player, suitcase)
         {
+            // camera shake when player touches suitcase
+            this.cameras.main.shake(100, 0.02);
             this.player.anims.stop();
             this.physics.world.removeCollider(this.grav);
             if(!this.gameOver){
@@ -155,7 +157,6 @@ class Game extends Phaser.Scene{
     jump(){
         if (this.player.body.onFloor() && !this.gameOver){
             this.player.setVelocityY(-800); //allows the for the player to go up before gravity exists
-
             // Currently putting this in jump so I have the code here. This currently counts score and increments by 1.
             this.playerScoreValue += 1;
             this.playerScoreDisplay.text = this.playerScoreValue;
