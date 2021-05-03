@@ -41,7 +41,7 @@ class getLocation extends Phaser.Scene {
                 typingSound.play();
                 playerInputLocation.text += event.key; 
                 info.name = playerInputLocation.text;
-                console.log('player name is ' + info.name); //debug
+                //console.log('player name is ' + info.name); //debug
             }
 
         });

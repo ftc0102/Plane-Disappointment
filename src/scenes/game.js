@@ -24,7 +24,7 @@ class Game extends Phaser.Scene{
         // Define restart key
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
         //Die key for debug
-        keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+        //keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
 
         // Parallax pieces
         // The last 2 integers are the dimensions of the image, make sure to set the correct ones.
@@ -210,10 +210,12 @@ class Game extends Phaser.Scene{
         }
 
         //debug purpose
+        /*
         if(Phaser.Input.Keyboard.JustDown(keyD)) {
             this.gameOver = true;
             //this.playerScoreValue += 1;
         }
+        */
 
         //game over screen
         if (this.gameOver) {

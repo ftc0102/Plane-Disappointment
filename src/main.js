@@ -60,7 +60,7 @@ let suitcaseRNG, sodaRNG, sodaPattern;
 let suitStart = 2
 let suitEnd = 4;
 //debug - press D to get game over
-let keyD;
+//let keyD;
 
 let playerInput;
 let playerInputLocation;

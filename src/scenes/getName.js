@@ -40,7 +40,7 @@ class getName extends Phaser.Scene {
                 typingSound.play();
                 playerInput.text += event.key; 
                 info.name = playerInput.text;
-                console.log('player name is ' + info.name); //debug
+                //console.log('player name is ' + info.name); //debug
             }
 
         });
