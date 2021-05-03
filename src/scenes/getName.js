@@ -12,6 +12,9 @@ class getName extends Phaser.Scene {
             });
         }
 
+        //pointer created to confirm player input is in or not
+        this.mouse = this.input.activePointer;
+
         typingSound = this.sound.add('playerTypingNoise');
         this.airplaneBeep = this.sound.add("airplaneBeep");
         this.mouseClick = this.sound.add('mouseClick');
@@ -19,7 +22,7 @@ class getName extends Phaser.Scene {
 
         //this.add.text(10, 10, 'Enter your name: \nClick to Proceed', {fontFamily: 'Comic Sans MS', fontSize: '28px'});
     
-        var playerInput = this.add.text(game.config.width/4, game.config.height/2, '', answerConfig);
+        playerInput = this.add.text(game.config.width/4, game.config.height/2, '', answerConfig);
     
         this.input.keyboard.on('keydown', function (event) { //keyboard input code credits from: https://phaser.io/examples/v3/view/input/keyboard/text-entry
             
@@ -34,18 +37,17 @@ class getName extends Phaser.Scene {
                 playerInput.text += event.key; 
                 info.name = playerInput.text;
                 console.log('player name is ' + info.name); //debug
-                //this.tempName = playerInput.text;
-                //this.info.name = this.tempName;
             }
 
         });
         
-        // for debug purposes, when you mouse click, it brings you to the game scene
-        this.input.on('pointerdown', function (pointer) {
+    }
+
+    update () {
+        if (this.mouse.isDown && playerInput.text.length > 0) { //check if there is input when players click
             this.airplaneBeep.play();
             this.scene.start('locationScreen');
-        }, this);
-
+        }
     }
     
 }
