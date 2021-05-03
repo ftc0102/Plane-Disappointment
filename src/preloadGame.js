@@ -19,6 +19,10 @@ class preloadGame extends Phaser.Scene{
         // menuscreen
         this.load.image('menuscreen', './assets/menuscreen.jpg');
 
+        //infoscreen backgrounds
+        this.load.image('input_1', './assets/input_1.jpg');
+        this.load.image('input_2', './assets/input_2.jpg');
+
         // Mouse Click Sound
         this.load.audio('mouseClick', './assets/mouseClick2.ogg');
         

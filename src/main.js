@@ -48,14 +48,15 @@ let info = {
 }
 
 // font config for info screens
-let infoConfig = {
-    fill: '#ffff00',
+let answerConfig = {
+    fill: '#4F3421',
     fontFamily: 'pixelFont',
-    fontSize: '28px',
+    fontSize: '120px',
     align: 'left',
     padding: {
         top: 5,
         bottom: 5,
-    },
-    //fixedWidth: 100
+        right: 400
+    }
+    //fixedWidth: 1280
 }

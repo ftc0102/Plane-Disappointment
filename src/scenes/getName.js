@@ -6,10 +6,11 @@ class getName extends Phaser.Scene {
     create () {
 
         this.mouseClick = this.sound.add('mouseClick');
+        this.inputBG_1 = this.add.image(0, 0, 'input_1').setOrigin(0,0);
 
-        this.add.text(10, 10, 'Enter your name: \nClick to Proceed', infoConfig);
+        //this.add.text(10, 10, 'Enter your name: \nClick to Proceed', {fontFamily: 'Comic Sans MS', fontSize: '28px'});
     
-        var playerInput = this.add.text(10, game.config.height/2, '', infoConfig);
+        var playerInput = this.add.text(game.config.width/4, game.config.height/2, '', answerConfig);
     
         this.input.keyboard.on('keydown', function (event) {
 

@@ -6,10 +6,25 @@ class getLocation extends Phaser.Scene {
     create () {
 
         this.mouseClick = this.sound.add('mouseClick');
+        this.inputBG_2 = this.add.image(0, 0, 'input_2').setOrigin(0,0);
 
-        this.add.text(10, 10, 'Security Question \nEnter the city you are flying today: \nClick to Proceed', infoConfig);
+        // font config for info screens
+        let infoConfig2 = {
+            fill: '#4F3421',
+            fontFamily: 'pixelFont',
+            fontSize: '50px',
+            align: 'left',
+            padding: {
+                top: 5,
+                bottom: 5,
+                right: 400
+            }
+            //fixedWidth: 1280
+        }
+
+        //this.add.text(10, 10, 'Security Question \nEnter the city you are flying today: \nClick to Proceed', infoConfig2);
     
-        var playerInputLocation = this.add.text(10, game.config.height/2, '', infoConfig);
+        var playerInputLocation = this.add.text(game.config.width/4, game.config.height/1.75, '', answerConfig);
     
         this.input.keyboard.on('keydown', function (event) {
 
