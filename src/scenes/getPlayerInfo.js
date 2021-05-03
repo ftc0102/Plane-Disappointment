@@ -40,11 +40,12 @@ class getPlayerInfo extends Phaser.Scene {
         }
         else if (event.keyCode === 32 || (event.keyCode >= 48 && event.keyCode < 90)) { // this is to add space and all upper and lower captial letters to the playerInput.text string
             playerInput.text += event.key; 
+            info.name = playerInput.text;
+            console.log('player name is ' + info.name);
             //this.tempName = playerInput.text;
             //this.info.name = this.tempName;
         }
 
-        
         /*
         if (event.keyboard == 18){ // this is the alt key
             playerName.setText(playerInput.value);
@@ -58,12 +59,6 @@ class getPlayerInfo extends Phaser.Scene {
             this.scene.start('gameScene');
         }, this);
 
-    }
-
-    update() {
-        //console.log('in update: ' + this.tempName);
-        //this.info.name = this.tempName;
-        //console.log('the player name is ' + this.info.name);
     }
     
 }

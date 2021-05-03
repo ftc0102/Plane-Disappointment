@@ -112,6 +112,7 @@ class Game extends Phaser.Scene{
 
         if(Phaser.Input.Keyboard.JustDown(keyD)) {
             this.gameOver = true;
+            this.playerScoreValue += 1;
         }
 
         //update high score when game over
@@ -126,7 +127,7 @@ class Game extends Phaser.Scene{
 
             if(this.playerScoreValue > info.highestScore) {
                 info.highestScore = this.playerScoreValue - 1;//for now I subtracted 1 from it since it is needed for the suitcase condition
-                console.log('the latest high score is ' + info.highestScore);
+                console.log(info.name + '\'s latest high score is ' + info.highestScore);
             }
             this.highScoreDisplay.text = info.highestScore;
 
