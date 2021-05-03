@@ -14,10 +14,15 @@ class preloadGame extends Phaser.Scene{
         this.load.image('interior', './assets/background_3.png');
         this.load.image('foreground', './assets/background_4.png');
         this.load.image('suitcase', './assets/suitcase3.png');
+        this.load.image('soda', './assets/sodacan.png');
         this.load.image('gameOverScreen', './assets/gameOverTicket.png');
 
         // menuscreen
         this.load.image('menuscreen', './assets/menuscreen.jpg');
+
+        //infoscreen backgrounds
+        this.load.image('input_1', './assets/input_1.jpg');
+        this.load.image('input_2', './assets/input_2.jpg');
 
         // Mouse Click Sound
         this.load.audio('mouseClick', './assets/mouseClick2.ogg');
@@ -27,6 +32,13 @@ class preloadGame extends Phaser.Scene{
 
         // bgm
         this.load.audio('backgroundMusic', './assets/bgm.mp3');
+        this.load.audio('playerInfoMusic', './assets/relaxingchillstuff.mp3');
+
+        // Keyboard clicking
+        this.load.audio('playerTypingNoise', './assets/keyboardClicksVersion2.mp3');
+
+        // Airplane beep
+        this.load.audio('airplaneBeep', './assets/airplaneBeep.mp3');
         
     }
     create(){

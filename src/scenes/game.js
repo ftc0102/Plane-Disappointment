@@ -3,14 +3,8 @@ class Game extends Phaser.Scene{
         super("gameScene");
     }
 
-    init(data) {
-        this.info = data; //grab the high score details from previous scene
-    }
-
     // ALL PRELOADS HAVE BEEN MOVED TO PRELOADGAME.JS 
     create() {
-
-        //console.log("entering create()");
 
         if (!bgMusic) {
             bgMusic = this.sound.add('backgroundMusic', { volume: 0.3 });
@@ -19,19 +13,28 @@ class Game extends Phaser.Scene{
             });
         }
 
+        if (infoMusic) {
+            infoMusic.stop();
+        }
+
+        if (typingSound) {
+            typingSound.stop();
+        }
+
         // Define restart key
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
+        //Die key for debug
         keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
 
         // Parallax pieces
         // The last 2 integers are the dimensions of the image, make sure to set the correct ones.
         // The first 2 integers are the X, Y coordinates
         // The string is the name of the asset, declared in preloadGame.js
-        this.sky = this.add.tileSprite(0, 0, 1280, 720, 'sky').setOrigin(0)
-        this.cloud = this.add.tileSprite(0, 0, 1280, 720, 'cloud').setOrigin(0)
-        this.witch = this.add.tileSprite(0, 0, 1280, 720, 'witch').setOrigin(0)
-        this.ground = this.add.tileSprite(0, 0, 1280, 720, 'ground').setOrigin(0)
-        this.interior = this.add.tileSprite(0, 0, 1280, 720, 'interior').setOrigin(0)
+        this.sky = this.add.tileSprite(0, 0, 1280, 720, 'sky').setOrigin(0);
+        this.cloud = this.add.tileSprite(0, 0, 1280, 720, 'cloud').setOrigin(0);
+        this.witch = this.add.tileSprite(0, 0, 1280, 720, 'witch').setOrigin(0);
+        this.ground = this.add.tileSprite(0, 0, 1280, 720, 'ground').setOrigin(0);
+        this.interior = this.add.tileSprite(0, 0, 1280, 720, 'interior').setOrigin(0);
 
         // Instantiating Player
         this.player = new Player(this, game.config.width/10, game.config.height/4, 'fa').setOrigin(0, 0);
@@ -48,12 +51,60 @@ class Game extends Phaser.Scene{
         this.grav = this.physics.add.collider(this.player, this.floor); // allows for hit detection between player and floor
         this.floor.setPushable(false); //prevents floor from being moved by player
 
+        // score stuff
+        this.gameOverTicket = this.add.image(game.config.width/2, game.config.height/2, 'gameOverScreen');
+        this.gameOverTicket.visible = false;
+        this.playerScoreValue = 0;
+
+        let scoreConfig = {
+            fill: '#1e2138',
+            fontFamily: 'pixelFont',
+            fontSize: '28px',
+            align: 'left',
+            padding: {
+                top: 5,
+                bottom: 5,
+            },
+            fixedWidth: 500
+        }
+
+
+        //display "Your Score: " on top left
+        this.playerScoreText = this.add.text(5, 0, 'Your Score: ', scoreConfig);
+        this.playerScoreText.setAlign('left');
+        //display actual player score next to the "Your Score: "
+        this.playerScoreDisplay = this.add.text(130, 0, this.playerScoreValue, scoreConfig);
+
+        //display information on the game over ticket; will be blank before game over screen
+        this.nameDisplay1 = this.add.text(385, 320, info.name, scoreConfig);
+        this.nameDisplay1.visible = false;
+        this.nameDisplay2 = this.add.text(840, 307, info.name, scoreConfig);
+        this.nameDisplay2.setFontSize(24);
+        this.nameDisplay2.visible = false;
+        this.locationDisplay = this.add.text(651, 375, info.arrivingLocation, scoreConfig);
+        this.locationDisplay.setFontSize(21);
+        this.locationDisplay.visible = false;
+        this.finalScoreDisplay = this.add.text(465, 358, '', scoreConfig);
+        this.highScoreDisplay = this.add.text(905, 340, '', scoreConfig);
+        this.highScoreDisplay.setFontSize(24);
+
+        // GAME OVER flag
+        this.gameOver = false;
+
         //suitcase group
         this.suitcaseGroup = this.add.group([
             {
                 runChildUpdate:true
             }
         ]);
+        
+        //soda group
+        this.sodaGroup = this.add.group([
+            {
+                runChildUpdate:true
+            }
+        ])
+
 
         //physics with suitcase group
         this.physics.add.overlap(this.player, this.suitcaseGroup, function(player, suitcase)
@@ -68,61 +119,98 @@ class Game extends Phaser.Scene{
             this.gameOver = true;
         }, null, this)
 
+        //collect soda
+        this.physics.add.overlap(this.player, this.sodaGroup, function(player, soda)
+        {
+            this.playerScoreValue +=1;
+            soda.die();
+        }, null, this)
+
         // Mouse click to jump
         this.input.on('pointerdown', this.jump, this);
 
-        // GAME OVER flag for later
-        this.gameOver = false;
-
-        // score stuff
-        this.playerScoreValue = 0;
-        let scoreConfig = {
-            fontFamily: 'Comic Sans MS',
-            fontSize: '28px',
-            align: 'right',
-            padding: {
-                top: 5,
-                bottom: 5,
-            },
-            fixedWidth: 100
-        }
-
-        this.playerScoreDisplay = this.add.text(0, 0, this.playerScoreValue, scoreConfig);
-        this.highScoreDisplay = this.add.text(1000, 0, '', scoreConfig);
 
         this.makeSuitcase(); //spawn suitcase
+        this.makeSoda();
 
         // have to create foreground last
         this.foreground = this.add.tileSprite(0, 0, 1280, 720, 'foreground').setOrigin(0);
 
     }
 
-    update() {
+    update(time, delta) {
+        //update event timers
+        suitcaseTimer += delta;
+        sodaTimer += delta;
+
+        //right now, they spawn periodically
+        //to make it random all i'll have to do is change the num in the while statements to a random number
+
+        while (suitcaseTimer >= 2000){
+            this.makeSuitcase();
+            suitcaseTimer -= 2000;
+        }
+
+        while (sodaTimer >= 3000){
+            this.makeSoda();
+            sodaTimer -= 3000;
+        }
+
+        //update score
+        this.playerScoreDisplay.text = this.playerScoreValue;
+
         //the conditions for making a suitcase
         //right now i set it to 4 jumps
         //ideally we'll base it on random timer callse but for now here we go
-        if (this.playerScoreValue == 4){
-            this.makeSuitcase();
-            this.playerScoreValue += 1;
+        
+
+        //move objects towards player
+        if(!this.gameOver){
+            Phaser.Actions.IncX(this.suitcaseGroup.getChildren(), -5);
+            Phaser.Actions.IncX(this.sodaGroup.getChildren(), -5);
         }
 
-        //move suitcase towards player
-        Phaser.Actions.IncX(this.suitcaseGroup.getChildren(), -5);
+        //run despawn check
+        let arrSuit=this.suitcaseGroup.getChildren();
+        for (let i=0; i<arrSuit.length; i++){
+            if (arrSuit[i].x < 0){
+                arrSuit[i].die();
+                console.log("suitcase despawned");
+            }
+        }
 
+        let arrSoda=this.sodaGroup.getChildren();
+        for (let i=0; i<arrSoda.length; i++){
+            if (arrSoda[i].x < 0){
+                arrSoda[i].die();
+                console.log("soda despawned");
+            }
+        }
+
+        //debug purpose
         if(Phaser.Input.Keyboard.JustDown(keyD)) {
             this.gameOver = true;
+            //this.playerScoreValue += 1;
         }
 
-        //update high score when game over
+        //game over screen
         if (this.gameOver) {
-            this.add.image(game.config.width/2, game.config.height/2, 'gameOverScreen');
-            
-            if(this.playerScoreValue > this.info.highestScore) {
-                this.info.highestScore = this.playerScoreValue;
-                console.log('the latest high score is ' + this.info.highestScore);
+            this.gameOverTicket.visible = true;
+            this.nameDisplay1.visible = true;
+            this.nameDisplay2.visible = true;
+            this.locationDisplay.visible = true;
+            this.playerScoreText.visible = false;
+            this.playerScoreDisplay.visible = false;
+            //this.add.image(game.config.width/2, game.config.height/2, 'gameOverScreen');
+            //pixel font used: https://fonts.google.com/specimen/VT323
+
+            if(this.playerScoreValue > info.highestScore) { //update high score when game over
+                info.highestScore = this.playerScoreValue; 
             }
-            this.highScoreDisplay.text = this.info.highestScore;  
-        } else { //if the game is not over yet
+            this.finalScoreDisplay.text = this.playerScoreValue;
+            this.highScoreDisplay.text = info.highestScore;
+
+        } else {                                //if the game is not over yet
             this.sky.tilePositionX += .1;
             this.cloud.tilePositionX += .25;
             this.witch.tilePositionX += .5;
@@ -137,45 +225,32 @@ class Game extends Phaser.Scene{
             this.scene.restart(this.info);
         }
 
-        // Change these values to change how fast the parallax effect occurs
-        // Note that the sky is not here. If you want the sky to parallax, include an
-        // identical line of code that is the same as those below this.
-
-
         // Keyboard input! Has to be here and not in create() for some reason, not sure why
         let cursors = this.input.keyboard.createCursorKeys();
-
-        // Press down to slide
-        // Currently incomplete
-        if (cursors.down.isDown){
-            // call slide function
-        }
-
 
     }
 
     jump(){
         if (this.player.body.onFloor() && !this.gameOver){
             this.player.setVelocityY(-800); //allows the for the player to go up before gravity exists
-            // Currently putting this in jump so I have the code here. This currently counts score and increments by 1.
-            this.playerScoreValue += 1;
-            this.playerScoreDisplay.text = this.playerScoreValue;
         }
-    }
-
-    slide(){
-        // If player is on floor and while DOWN is held
-            // Change animation
-            // Change collision box
-        pass // delete this when the function is made
     }
 
     makeSuitcase(){
         this.suitcaseGroup.add(new Suitcase(
             this,
-            floorHorizontal*1.5,
+            floorHorizontal*2,
             floorVertical*.95,
             "suitcase",
+            0));
+    }
+
+    makeSoda(){
+        this.sodaGroup.add(new Soda(
+            this,
+            floorHorizontal*3,
+            game.config.height/4,
+            "soda",
             0));
     }
 
