@@ -118,6 +118,8 @@ class Game extends Phaser.Scene{
         //update high score when game over
         if (this.gameOver) {
             this.add.image(game.config.width/2, game.config.height/2, 'gameOverScreen');
+            //pixel font from : https://fonts.google.com/specimen/VT323
+
             /*
             if(this.playerScoreValue > this.info.highestScore) {
                 this.info.highestScore = this.playerScoreValue;
