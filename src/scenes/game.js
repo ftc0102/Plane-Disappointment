@@ -51,6 +51,13 @@ class Game extends Phaser.Scene{
                 runChildUpdate:true
             }
         ]);
+        
+        //soda group
+        this.sodaGroup = this.add.group([
+            {
+                runChildUpdate:true
+            }
+        ])
 
 
         //physics with suitcase group
@@ -62,6 +69,12 @@ class Game extends Phaser.Scene{
                 this.player.body.setVelocityY(-200);
             }
             this.gameOver = true;
+        }, null, this)
+
+        //collect soda
+        this.physics.add.overlap(this.player, this.sodaGroup, function(player, soda)
+        {
+            soda.die();
         }, null, this)
 
         // Mouse click to jump
@@ -87,6 +100,7 @@ class Game extends Phaser.Scene{
         this.highScoreDisplay = this.add.text(1000, 0, '', scoreConfig);
 
         this.makeSuitcase(); //spawn suitcase
+        this.makeSoda();
 
         // have to create foreground last
         this.foreground = this.add.tileSprite(0, 0, 1280, 720, 'foreground').setOrigin(0);
@@ -103,8 +117,24 @@ class Game extends Phaser.Scene{
                                         //to leave this condition
         }
 
-        //move suitcase towards player
+        //move objects towards player
         Phaser.Actions.IncX(this.suitcaseGroup.getChildren(), -5);
+        Phaser.Actions.IncX(this.sodaGroup.getChildren(), -5);
+
+        //run despawn check
+        this.suitcaseGroup.children.iterate(function(suitcase){
+            if(suitcase.x < 0){
+                suitcase.die();
+                console.log("suitcase despawned");
+            }
+        });
+
+        this.suitcaseGroup.children.iterate(function(soda){
+            if(soda.x < 0){
+                soda.die();
+                console.log("soda despawned");
+            }
+        });
 
         if(Phaser.Input.Keyboard.JustDown(keyD)) {
             this.gameOver = true;
@@ -142,13 +172,6 @@ class Game extends Phaser.Scene{
         // Keyboard input! Has to be here and not in create() for some reason, not sure why
         let cursors = this.input.keyboard.createCursorKeys();
 
-        // Press down to slide
-        // Currently incomplete
-        if (cursors.down.isDown){
-            // call slide function
-        }
-
-
     }
 
     jump(){
@@ -161,19 +184,21 @@ class Game extends Phaser.Scene{
         }
     }
 
-    slide(){
-        // If player is on floor and while DOWN is held
-            // Change animation
-            // Change collision box
-        pass // delete this when the function is made
-    }
-
     makeSuitcase(){
         this.suitcaseGroup.add(new Suitcase(
             this,
-            floorHorizontal*1.5,
+            floorHorizontal*2,
             floorVertical*.95,
             "suitcase",
+            0));
+    }
+
+    makeSoda(){
+        this.sodaGroup.add(new Soda(
+            this,
+            floorHorizontal*3,
+            game.config.height/4,
+            "soda",
             0));
     }
 
