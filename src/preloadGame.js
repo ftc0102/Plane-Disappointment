@@ -33,7 +33,12 @@ class preloadGame extends Phaser.Scene{
         // bgm
         this.load.audio('backgroundMusic', './assets/bgm.mp3');
         this.load.audio('playerInfoMusic', './assets/relaxingchillstuff.mp3');
-        this.load.audio('playerTypingNoise', './assets/keyboardClicks.mp3');
+
+        // Keyboard clicking
+        this.load.audio('playerTypingNoise', './assets/keyboardClicksVersion2.mp3');
+
+        // Airplane beep
+        this.load.audio('airplaneBeep', './assets/airplaneBeep.mp3');
         
     }
     create(){

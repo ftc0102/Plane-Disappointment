@@ -13,6 +13,7 @@ class getName extends Phaser.Scene {
         }
 
         typingSound = this.sound.add('playerTypingNoise');
+        this.airplaneBeep = this.sound.add("airplaneBeep");
         this.mouseClick = this.sound.add('mouseClick');
         this.inputBG_1 = this.add.image(0, 0, 'input_1').setOrigin(0,0);
 
@@ -40,7 +41,7 @@ class getName extends Phaser.Scene {
         
         // for debug purposes, when you mouse click, it brings you to the game scene
         this.input.on('pointerdown', function (pointer) {
-            this.mouseClick.play();
+            this.airplaneBeep.play();
             this.scene.start('locationScreen');
         }, this);
 
