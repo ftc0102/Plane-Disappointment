@@ -109,6 +109,8 @@ class Game extends Phaser.Scene{
         //physics with suitcase group
         this.physics.add.overlap(this.player, this.suitcaseGroup, function(player, suitcase)
         {
+            // camera shake when player touches suitcase
+            this.cameras.main.shake(100, 0.02);
             this.player.anims.stop();
             this.physics.world.removeCollider(this.grav);
             if(!this.gameOver){
