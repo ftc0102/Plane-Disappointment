@@ -30,15 +30,15 @@ class getLocation extends Phaser.Scene {
 
             //A document that explains each unique keycode: https://github.com/photonstorm/phaser/blob/v3.51.0/src/input/keyboard/keys/KeyCodes.js 
             
-            if (event.keyCode === 8 && playerInput.text.length > 0) { //this is the backspace key; to delete the typed text from playerInput.text string
+            if (event.keyCode === 8 && playerInputLocation.text.length > 0) { //this is the backspace key; to delete the typed text from playerInput.text string
                 typingSound.play();
-                playerInput.text = playerInput.text.substr(0, playerInput.text.length - 1);
-            } else if (playerInput.text.length >= 20) { //if it's too long, it won't insert more input
+                playerInputLocation.text = playerInputLocation.text.substr(0, playerInputLocation.text.length - 1);
+            } else if (playerInputLocation.text.length >= 20) { //if it's too long, it won't insert more input
                 console.log('too long');
             } else if (event.keyCode === 32 || (event.keyCode >= 48 && event.keyCode <= 90)) { // this is to add space and all upper and lower captial letters to the playerInput.text string
                 typingSound.play();
-                playerInput.text += event.key; 
-                info.name = playerInput.text;
+                playerInputLocation.text += event.key; 
+                info.name = playerInputLocation.text;
                 console.log('player name is ' + info.name); //debug
             }
 
