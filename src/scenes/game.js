@@ -52,6 +52,7 @@ class Game extends Phaser.Scene{
             }
         ]);
 
+
         //physics with suitcase group
         this.physics.add.overlap(this.player, this.suitcaseGroup, function(player, suitcase)
         {
