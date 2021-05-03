@@ -130,6 +130,7 @@ class Game extends Phaser.Scene{
             if(this.playerScoreValue > info.highestScore) {
                 info.highestScore = this.playerScoreValue - 1;//for now I subtracted 1 from it since it is needed for the suitcase condition
                 console.log(info.name + '\'s latest high score is ' + info.highestScore);
+                console.log('they are going to ' + info.arrivingLocation);
             }
             this.highScoreDisplay.text = info.highestScore;
 
