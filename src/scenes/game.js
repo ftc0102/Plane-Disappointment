@@ -52,20 +52,44 @@ class Game extends Phaser.Scene{
         this.floor.setPushable(false); //prevents floor from being moved by player
 
         // score stuff
+        this.gameOverTicket = this.add.image(game.config.width/2, game.config.height/2, 'gameOverScreen');
+        this.gameOverTicket.visible = false;
         this.playerScoreValue = 0;
+
         let scoreConfig = {
-            fontFamily: 'Comic Sans MS',
+            fill: '#1e2138',
+            fontFamily: 'pixelFont',
             fontSize: '28px',
-            align: 'right',
+            align: 'left',
             padding: {
                 top: 5,
                 bottom: 5,
             },
-            fixedWidth: 100
+            fixedWidth: 500
         }
 
-        this.playerScoreDisplay = this.add.text(0, 0, this.playerScoreValue, scoreConfig);
-        this.highScoreDisplay = this.add.text(1000, 0, '', scoreConfig);
+
+        //display "Your Score: " on top left
+        this.playerScoreText = this.add.text(5, 0, 'Your Score: ', scoreConfig);
+        this.playerScoreText.setAlign('left');
+        //display actual player score next to the "Your Score: "
+        this.playerScoreDisplay = this.add.text(130, 0, this.playerScoreValue, scoreConfig);
+
+        //display information on the game over ticket; will be blank before game over screen
+        this.nameDisplay1 = this.add.text(385, 320, info.name, scoreConfig);
+        this.nameDisplay1.visible = false;
+        this.nameDisplay2 = this.add.text(840, 307, info.name, scoreConfig);
+        this.nameDisplay2.setFontSize(24);
+        this.nameDisplay2.visible = false;
+        this.locationDisplay = this.add.text(651, 375, info.arrivingLocation, scoreConfig);
+        this.locationDisplay.setFontSize(21);
+        this.locationDisplay.visible = false;
+        this.finalScoreDisplay = this.add.text(465, 358, '', scoreConfig);
+        this.highScoreDisplay = this.add.text(905, 340, '', scoreConfig);
+        this.highScoreDisplay.setFontSize(24);
+
+        // GAME OVER flag
+        this.gameOver = false;
 
         //suitcase group
         this.suitcaseGroup = this.add.group([
@@ -103,8 +127,6 @@ class Game extends Phaser.Scene{
         // Mouse click to jump
         this.input.on('pointerdown', this.jump, this);
 
-        // GAME OVER flag for later
-        this.gameOver = false;
 
         this.makeSuitcase(); //spawn suitcase
         this.makeSoda();
@@ -144,22 +166,27 @@ class Game extends Phaser.Scene{
             }
         });
 
+        //debug purpose
         if(Phaser.Input.Keyboard.JustDown(keyD)) {
             this.gameOver = true;
             //this.playerScoreValue += 1;
         }
 
-        //update high score when game over
+        //game over screen
         if (this.gameOver) {
-            this.add.image(game.config.width/2, game.config.height/2, 'gameOverScreen');
+            this.gameOverTicket.visible = true;
+            this.nameDisplay1.visible = true;
+            this.nameDisplay2.visible = true;
+            this.locationDisplay.visible = true;
+            this.playerScoreText.visible = false;
+            this.playerScoreDisplay.visible = false;
+            //this.add.image(game.config.width/2, game.config.height/2, 'gameOverScreen');
             //pixel font used: https://fonts.google.com/specimen/VT323
 
-
-            if(this.playerScoreValue > info.highestScore) {
+            if(this.playerScoreValue > info.highestScore) { //update high score when game over
                 info.highestScore = this.playerScoreValue; 
-                //console.log(info.name + '\'s latest high score is ' + info.highestScore);
-                //console.log('they are going to ' + info.arrivingLocation);
             }
+            this.finalScoreDisplay.text = this.playerScoreValue;
             this.highScoreDisplay.text = info.highestScore;
 
         } else {                                //if the game is not over yet
