@@ -45,6 +45,22 @@ class Game extends Phaser.Scene{
         this.grav = this.physics.add.collider(this.player, this.floor); // allows for hit detection between player and floor
         this.floor.setPushable(false); //prevents floor from being moved by player
 
+        // score stuff
+        this.playerScoreValue = 0;
+        let scoreConfig = {
+            fontFamily: 'Comic Sans MS',
+            fontSize: '28px',
+            align: 'right',
+            padding: {
+                top: 5,
+                bottom: 5,
+            },
+            fixedWidth: 100
+        }
+
+        this.playerScoreDisplay = this.add.text(0, 0, this.playerScoreValue, scoreConfig);
+        this.highScoreDisplay = this.add.text(1000, 0, '', scoreConfig);
+
         //suitcase group
         this.suitcaseGroup = this.add.group([
             {
@@ -74,6 +90,7 @@ class Game extends Phaser.Scene{
         //collect soda
         this.physics.add.overlap(this.player, this.sodaGroup, function(player, soda)
         {
+            this.playerScoreValue +=1;
             soda.die();
         }, null, this)
 
@@ -82,22 +99,6 @@ class Game extends Phaser.Scene{
 
         // GAME OVER flag for later
         this.gameOver = false;
-
-        // score stuff
-        this.playerScoreValue = 0;
-        let scoreConfig = {
-            fontFamily: 'Comic Sans MS',
-            fontSize: '28px',
-            align: 'right',
-            padding: {
-                top: 5,
-                bottom: 5,
-            },
-            fixedWidth: 100
-        }
-
-        this.playerScoreDisplay = this.add.text(0, 0, this.playerScoreValue, scoreConfig);
-        this.highScoreDisplay = this.add.text(1000, 0, '', scoreConfig);
 
         this.makeSuitcase(); //spawn suitcase
         this.makeSoda();
@@ -108,14 +109,13 @@ class Game extends Phaser.Scene{
     }
 
     update() {
+        //update score
+        this.playerScoreDisplay.text = this.playerScoreValue;
+
         //the conditions for making a suitcase
         //right now i set it to 4 jumps
         //ideally we'll base it on random timer callse but for now here we go
-        if (this.playerScoreValue == 4){
-            this.makeSuitcase();
-            this.playerScoreValue += 1; //will need to remove it in the future since it's add a extra point to player in order
-                                        //to leave this condition
-        }
+        
 
         //move objects towards player
         Phaser.Actions.IncX(this.suitcaseGroup.getChildren(), -5);
@@ -177,10 +177,6 @@ class Game extends Phaser.Scene{
     jump(){
         if (this.player.body.onFloor() && !this.gameOver){
             this.player.setVelocityY(-800); //allows the for the player to go up before gravity exists
-
-            // Currently putting this in jump so I have the code here. This currently counts score and increments by 1.
-            this.playerScoreValue += 1;
-            this.playerScoreDisplay.text = this.playerScoreValue;
         }
     }
 
