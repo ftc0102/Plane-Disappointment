@@ -58,7 +58,7 @@ let info = {
 let answerConfig = {
     fill: '#4F3421',
     fontFamily: 'pixelFont',
-    fontSize: '120px',
+    fontSize: '110px',
     align: 'left',
     padding: {
         top: 5,
