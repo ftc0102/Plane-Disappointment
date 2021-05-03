@@ -45,6 +45,9 @@ let sodaTimer = 0;
 //debug - press D to get game over
 let keyD;
 
+let playerInput;
+let playerInputLocation;
+
 let info = {
     highestScore: 0,
     name: 'Bob',

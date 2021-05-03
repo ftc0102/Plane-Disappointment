@@ -16,12 +16,15 @@ class getLocation extends Phaser.Scene {
             typingSound.stop();
         }
 
+        //pointer created to confirm player input is in or not
+        this.mouse2 = this.input.activePointer;
+
         typingSound = this.sound.add('playerTypingNoise');
         this.airplaneBeep = this.sound.add("airplaneBeep");
         this.mouseClick = this.sound.add('mouseClick');
         this.inputBG_2 = this.add.image(0, 0, 'input_2').setOrigin(0,0);
     
-        var playerInputLocation = this.add.text(game.config.width/4, game.config.height/1.75, '', answerConfig);
+        playerInputLocation = this.add.text(game.config.width/4, game.config.height/1.75, '', answerConfig);
     
         this.input.keyboard.on('keydown', function (event) { //keyboard input code credits from: https://phaser.io/examples/v3/view/input/keyboard/text-entry
 
@@ -41,12 +44,13 @@ class getLocation extends Phaser.Scene {
 
         });
         
-        // for debug purposes, when you mouse click, it brings you to the game scene
-        this.input.on('pointerdown', function (pointer) {
+    }
+
+    update () {
+        if (this.mouse2.isDown && playerInputLocation.text.length > 0) { //check if there is input when players click
             this.airplaneBeep.play();
             this.scene.start('gameScene');
-        }, this);
-
+        }
     }
     
 }
