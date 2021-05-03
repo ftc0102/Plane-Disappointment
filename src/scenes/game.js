@@ -118,8 +118,10 @@ class Game extends Phaser.Scene{
         
 
         //move objects towards player
-        Phaser.Actions.IncX(this.suitcaseGroup.getChildren(), -5);
-        Phaser.Actions.IncX(this.sodaGroup.getChildren(), -5);
+        if(!this.gameOver){
+            Phaser.Actions.IncX(this.suitcaseGroup.getChildren(), -5);
+            Phaser.Actions.IncX(this.sodaGroup.getChildren(), -5);
+        }
 
         //run despawn check
         this.suitcaseGroup.children.iterate(function(suitcase){
