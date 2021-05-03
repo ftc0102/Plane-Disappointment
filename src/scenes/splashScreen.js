@@ -11,10 +11,11 @@ class splashScreen extends Phaser.Scene {
 
         // sound for clicking
         this.mouseClick = this.sound.add('mouseClick');
+        this.airplaneBeep = this.sound.add("airplaneBeep");
 
         //clicks to move to info scenes
         this.input.on('pointerdown', function (pointer) {
-            this.mouseClick.play();
+            this.airplaneBeep.play();
             this.scene.start('playerNameScreen');
         }, this);
         
