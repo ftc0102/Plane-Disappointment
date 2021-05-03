@@ -16,16 +16,16 @@ class getPlayerInfo extends Phaser.Scene {
             //A document that explains each unique keycode: https://github.com/photonstorm/phaser/blob/v3.51.0/src/input/keyboard/keys/KeyCodes.js 
             
             if (event.keyCode === 8 && playerInput.text.length > 0) { //this is the backspace key; to delete the typed text from playerInput.text string
-                playerInput.text = playerInput.text.substr(0, playerInput.text.length - 1); //delete input
+                playerInput.text = playerInput.text.substr(0, playerInput.text.length - 1);
             }
-            else if (event.keyCode === 32 || (event.keyCode >= 48 && event.keyCode < 90)) { // this is to add space and all upper and lower captial letters to the playerInput.text string
+            else if (event.keyCode === 32 || (event.keyCode >= 48 && event.keyCode <= 90)) { // this is to add space and all upper and lower captial letters to the playerInput.text string
                 playerInput.text += event.key; 
                 info.name = playerInput.text;
-                console.log('player name is ' + info.name);
+                console.log('player name is ' + info.name); //debug
                 //this.tempName = playerInput.text;
                 //this.info.name = this.tempName;
             }
-            
+
         });
         
         // for debug purposes, when you mouse click, it brings you to the game scene

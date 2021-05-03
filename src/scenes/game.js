@@ -2,11 +2,6 @@ class Game extends Phaser.Scene{
     constructor() {
         super("gameScene");
     }
-    /*
-    init(data) {
-        this.info = data; //grab the high score details from previous scene
-    }
-    */
 
     // ALL PRELOADS HAVE BEEN MOVED TO PRELOADGAME.JS 
     create() {
@@ -118,19 +113,13 @@ class Game extends Phaser.Scene{
         //update high score when game over
         if (this.gameOver) {
             this.add.image(game.config.width/2, game.config.height/2, 'gameOverScreen');
-            //pixel font from : https://fonts.google.com/specimen/VT323
+            //pixel font used: https://fonts.google.com/specimen/VT323
 
-            /*
-            if(this.playerScoreValue > this.info.highestScore) {
-                this.info.highestScore = this.playerScoreValue;
-                console.log('the latest high score is ' + this.info.highestScore);
-            }
-            this.highScoreDisplay.text = this.info.highestScore; */ 
 
             if(this.playerScoreValue > info.highestScore) {
-                info.highestScore = this.playerScoreValue - 1;//for now I subtracted 1 from it since it is needed for the suitcase condition
-                console.log(info.name + '\'s latest high score is ' + info.highestScore);
-                console.log('they are going to ' + info.arrivingLocation);
+                info.highestScore = this.playerScoreValue - 1;   //for now I subtracted 1 from it since it is needed for the suitcase condition
+                //console.log(info.name + '\'s latest high score is ' + info.highestScore);
+                //console.log('they are going to ' + info.arrivingLocation);
             }
             this.highScoreDisplay.text = info.highestScore;
 
@@ -148,11 +137,6 @@ class Game extends Phaser.Scene{
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)){
             this.scene.restart(this.info);
         }
-
-        // Change these values to change how fast the parallax effect occurs
-        // Note that the sky is not here. If you want the sky to parallax, include an
-        // identical line of code that is the same as those below this.
-
 
         // Keyboard input! Has to be here and not in create() for some reason, not sure why
         let cursors = this.input.keyboard.createCursorKeys();
