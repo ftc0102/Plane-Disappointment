@@ -137,6 +137,13 @@ class Game extends Phaser.Scene{
         // Mouse click to jump
         this.input.on('pointerdown', this.jump, this);
 
+        //delayed call to increase difficulty
+        this.hardMode = this.time.delayedCall(30000, () => {
+            suitStart = 1;
+            suitEnd = 2;
+        }, null, this);
+            
+
         // have to create foreground last
         this.foreground = this.add.tileSprite(0, 0, 1280, 720, 'foreground').setOrigin(0);
 
@@ -153,7 +160,7 @@ class Game extends Phaser.Scene{
         while (suitcaseTimer >= suitcaseRNG*1000){
             this.makeSuitcase();
             suitcaseTimer -= suitcaseRNG*1000;
-            suitcaseRNG = Phaser.Math.Between(2,4);
+            suitcaseRNG = Phaser.Math.Between(suitStart,suitEnd);
             console.log("suitcaseRNG: " + suitcaseRNG);
         }
 
@@ -177,12 +184,7 @@ class Game extends Phaser.Scene{
         }
 
         //update score
-        this.playerScoreDisplay.text = this.playerScoreValue;
-
-        //the conditions for making a suitcase
-        //right now i set it to 4 jumps
-        //ideally we'll base it on random timer callse but for now here we go
-        
+        this.playerScoreDisplay.text = this.playerScoreValue;  
 
         //move objects towards player
         if(!this.gameOver){
@@ -269,11 +271,13 @@ class Game extends Phaser.Scene{
     make3Soda(){
         let y = Phaser.Math.Between(game.config.height/4, game.config.height/3);
         this.sodaGroup.add(new Soda(this, floorHorizontal*3, y, "soda", 0));
-        this.delay1 = this.time.delayedCall(100, () => {
+        this.delay1 = this.time.delayedCall(300, () => {
+            y = Phaser.Math.Between(game.config.height/4, game.config.height/3);
             this.sodaGroup.add(new Soda(this, floorHorizontal*3, y, "soda", 0));
         }, null, this);
 
-        this.delay2 = this.time.delayedCall(200, () => {
+        this.delay2 = this.time.delayedCall(600, () => {
+            y = Phaser.Math.Between(game.config.height/4, game.config.height/3);
             this.sodaGroup.add(new Soda(this, floorHorizontal*3, y, "soda", 0));
         }, null, this);
 
@@ -282,19 +286,23 @@ class Game extends Phaser.Scene{
     make5Soda(){
         let y = Phaser.Math.Between(game.config.height/4, game.config.height/3);
         this.sodaGroup.add(new Soda(this, floorHorizontal*3, y, "soda", 0));
-        this.delay1 = this.time.delayedCall(100, () => {
+        this.delay1 = this.time.delayedCall(300, () => {
+            y = Phaser.Math.Between(game.config.height/4, game.config.height/3);
             this.sodaGroup.add(new Soda(this, floorHorizontal*3, y, "soda", 0));
         }, null, this);
 
-        this.delay2 = this.time.delayedCall(200, () => {
+        this.delay2 = this.time.delayedCall(600, () => {
+            y = Phaser.Math.Between(game.config.height/4, game.config.height/3);
             this.sodaGroup.add(new Soda(this, floorHorizontal*3, y, "soda", 0));
         }, null, this);
 
-        this.delay3 = this.time.delayedCall(300, () => {
+        this.delay3 = this.time.delayedCall(900, () => {
+            y = Phaser.Math.Between(game.config.height/4, game.config.height/3);
             this.sodaGroup.add(new Soda(this, floorHorizontal*3, y, "soda", 0));
         }, null, this);
 
-        this.delay4 = this.time.delayedCall(400, () => {
+        this.delay4 = this.time.delayedCall(1200, () => {
+            y = Phaser.Math.Between(game.config.height/4, game.config.height/3);
             this.sodaGroup.add(new Soda(this, floorHorizontal*3, y, "soda", 0));
         }, null, this);
 

@@ -1,13 +1,19 @@
 //
 //
-// Names: Dany, Emily, Fion, Gillian
+// Plane Disappointment
+// A game by:
+// Dany -  Audio, SFX, Programming
+// Emily - Programming
+// Fion - Background Art, Character Animations, UX
+// Gillian - Menu Art, Sprite Art, UI
 // Game Title: Plane Disappointment
-// Date Completed:
-// Creative Tilt:
+// Date Completed: 3 May 2021
+// Creative Tilt: 
 //
-//
-//
-//
+// Emily is quite happy with her randomization implementation for the suitcases and soda
+// 
+// Our game has very defined aesthetics, with the setpiece of an airplane tying our game 
+// Due to having a very art-leaning team, we tried to maximize the aesthetic aspects of our game
 
 let config = {
     type: Phaser.CANVAS,
@@ -37,12 +43,14 @@ let typingSound;
 
 // Added keyR for restart game
 let keyR;
-
+//some global vars
 let floorHorizontal = game.config.width/2;
 let floorVertical = game.config.height * .90;
 let suitcaseTimer = 0;
 let sodaTimer = 0;
-let suitcaseRNG, sodaRNG, sodaPattern;
+let suitcaseRNG, sodaRNG, sodaPattern; 
+let suitStart = 2
+let suitEnd = 4;
 //debug - press D to get game over
 let keyD;
 
