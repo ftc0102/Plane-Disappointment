@@ -32,6 +32,8 @@ let config = {
 
 let game = new Phaser.Game(config);
 let bgMusic;
+let infoMusic;
+let typingSound;
 
 // Added keyR for restart game
 let keyR;

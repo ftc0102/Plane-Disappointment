@@ -5,6 +5,18 @@ class getLocation extends Phaser.Scene {
 
     create () {
 
+        if (!infoMusic) {
+            infoMusic = this.sound.add('playerInfoMusic', { volume: 0.3 });
+            infoMusic.play({
+              loop: true,
+            });
+        }
+
+        if (typingSound) {
+            typingSound.stop();
+        }
+
+        typingSound = this.sound.add('playerTypingNoise');
         this.mouseClick = this.sound.add('mouseClick');
         this.inputBG_2 = this.add.image(0, 0, 'input_2').setOrigin(0,0);
 
@@ -34,6 +46,7 @@ class getLocation extends Phaser.Scene {
                 playerInputLocation.text = playerInputLocation.text.substr(0, playerInputLocation.text.length - 1); //delete input
             }
             else if (event.keyCode === 32 || (event.keyCode >= 48 && event.keyCode <= 90)) {   // this is to add space and all upper and lower captial letters to the input string
+                typingSound.play();
                 playerInputLocation.text += event.key; 
                 info.arrivingLocation = playerInputLocation.text;
                 console.log(info.name + ' is going to ' + info.arrivingLocation); //debug

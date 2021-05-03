@@ -15,6 +15,14 @@ class Game extends Phaser.Scene{
             });
         }
 
+        if (infoMusic) {
+            infoMusic.stop();
+        }
+
+        if (typingSound) {
+            typingSound.stop();
+        }
+
         // Define restart key
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
         //Die key for debug

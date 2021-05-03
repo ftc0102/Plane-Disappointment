@@ -5,6 +5,14 @@ class getName extends Phaser.Scene {
 
     create () {
 
+        if (!infoMusic) {
+            infoMusic = this.sound.add('playerInfoMusic', { volume: 0.3 });
+            infoMusic.play({
+              loop: true,
+            });
+        }
+
+        typingSound = this.sound.add('playerTypingNoise');
         this.mouseClick = this.sound.add('mouseClick');
         this.inputBG_1 = this.add.image(0, 0, 'input_1').setOrigin(0,0);
 
@@ -13,13 +21,14 @@ class getName extends Phaser.Scene {
         var playerInput = this.add.text(game.config.width/4, game.config.height/2, '', answerConfig);
     
         this.input.keyboard.on('keydown', function (event) {
-
+            
             //A document that explains each unique keycode: https://github.com/photonstorm/phaser/blob/v3.51.0/src/input/keyboard/keys/KeyCodes.js 
             
             if (event.keyCode === 8 && playerInput.text.length > 0) { //this is the backspace key; to delete the typed text from playerInput.text string
                 playerInput.text = playerInput.text.substr(0, playerInput.text.length - 1);
             }
             else if (event.keyCode === 32 || (event.keyCode >= 48 && event.keyCode <= 90)) { // this is to add space and all upper and lower captial letters to the playerInput.text string
+                typingSound.play();
                 playerInput.text += event.key; 
                 info.name = playerInput.text;
                 console.log('player name is ' + info.name); //debug
