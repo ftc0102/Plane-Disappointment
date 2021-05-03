@@ -124,12 +124,16 @@ class Game extends Phaser.Scene{
             soda.die();
         }, null, this)
 
+        //randomness variables
+        suitcaseRNG = Phaser.Math.Between(2,4);
+        console.log("suitcaseRNG: " + suitcaseRNG);
+        sodaRNG = Phaser.Math.Between(3,5);
+        console.log("sodaRNG: " + sodaRNG);
+        sodaPattern = Phaser.Math.Between(1,3);
+        console.log("sodaPattern: " + sodaPattern);
+
         // Mouse click to jump
         this.input.on('pointerdown', this.jump, this);
-
-
-        this.makeSuitcase(); //spawn suitcase
-        this.makeSoda();
 
         // have to create foreground last
         this.foreground = this.add.tileSprite(0, 0, 1280, 720, 'foreground').setOrigin(0);
@@ -144,14 +148,30 @@ class Game extends Phaser.Scene{
         //right now, they spawn periodically
         //to make it random all i'll have to do is change the num in the while statements to a random number
 
-        while (suitcaseTimer >= 2000){
+        while (suitcaseTimer >= suitcaseRNG*1000){
             this.makeSuitcase();
-            suitcaseTimer -= 2000;
+            suitcaseTimer -= suitcaseRNG*1000;
+            suitcaseRNG = Phaser.Math.Between(2,4);
+            console.log("suitcaseRNG: " + suitcaseRNG);
         }
 
-        while (sodaTimer >= 3000){
-            this.makeSoda();
-            sodaTimer -= 3000;
+        while (sodaTimer >= sodaRNG*1000){
+            switch(sodaPattern){
+                case 1:
+                    this.makeSoda();
+                    break;
+                case 2:
+                    this.make3Soda();
+                    break;
+                case 3:
+                    this.make5Soda();
+                    break;
+            }    
+            sodaTimer -= sodaRNG*1000;
+            sodaRNG = Phaser.Math.Between(3,5);
+            console.log("sodaRNG: " + sodaRNG);
+            sodaPattern = Phaser.Math.Between(1,3);
+            console.log("sodaPattern: " + sodaPattern);
         }
 
         //update score
@@ -235,21 +255,46 @@ class Game extends Phaser.Scene{
     }
 
     makeSuitcase(){
-        this.suitcaseGroup.add(new Suitcase(
-            this,
-            floorHorizontal*2,
-            floorVertical*.95,
-            "suitcase",
-            0));
+        this.suitcaseGroup.add(new Suitcase(this,floorHorizontal*2, floorVertical*.95, "suitcase", 0));
     }
 
     makeSoda(){
-        this.sodaGroup.add(new Soda(
-            this,
-            floorHorizontal*3,
-            game.config.height/4,
-            "soda",
-            0));
+        let y = Phaser.Math.Between(game.config.height/4, game.config.height/3);
+        this.sodaGroup.add(new Soda(this, floorHorizontal*3, y, "soda", 0)); 
+    }
+
+    make3Soda(){
+        let y = Phaser.Math.Between(game.config.height/4, game.config.height/3);
+        this.sodaGroup.add(new Soda(this, floorHorizontal*3, y, "soda", 0));
+        this.delay1 = this.time.delayedCall(100, () => {
+            this.sodaGroup.add(new Soda(this, floorHorizontal*3, y, "soda", 0));
+        }, null, this);
+
+        this.delay2 = this.time.delayedCall(200, () => {
+            this.sodaGroup.add(new Soda(this, floorHorizontal*3, y, "soda", 0));
+        }, null, this);
+
+    }
+
+    make5Soda(){
+        let y = Phaser.Math.Between(game.config.height/4, game.config.height/3);
+        this.sodaGroup.add(new Soda(this, floorHorizontal*3, y, "soda", 0));
+        this.delay1 = this.time.delayedCall(100, () => {
+            this.sodaGroup.add(new Soda(this, floorHorizontal*3, y, "soda", 0));
+        }, null, this);
+
+        this.delay2 = this.time.delayedCall(200, () => {
+            this.sodaGroup.add(new Soda(this, floorHorizontal*3, y, "soda", 0));
+        }, null, this);
+
+        this.delay3 = this.time.delayedCall(300, () => {
+            this.sodaGroup.add(new Soda(this, floorHorizontal*3, y, "soda", 0));
+        }, null, this);
+
+        this.delay4 = this.time.delayedCall(400, () => {
+            this.sodaGroup.add(new Soda(this, floorHorizontal*3, y, "soda", 0));
+        }, null, this);
+
     }
 
 }

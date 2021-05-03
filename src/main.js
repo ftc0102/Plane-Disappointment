@@ -20,7 +20,7 @@ let config = {
     physics: {
         default: 'arcade',
         arcade: {
-            debug: true,
+            //debug: true,
             gravity: {
                 x: 0,
                 y: 0
@@ -42,6 +42,7 @@ let floorHorizontal = game.config.width/2;
 let floorVertical = game.config.height * .90;
 let suitcaseTimer = 0;
 let sodaTimer = 0;
+let suitcaseRNG, sodaRNG, sodaPattern;
 //debug - press D to get game over
 let keyD;
 
