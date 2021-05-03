@@ -14,11 +14,9 @@ class getPlayerInfo extends Phaser.Scene {
 
         this.mouseClick = this.sound.add('mouseClick');
 
-        this.add.text(10, 10, 'Enter your name:', { font: '32px Courier', fill: '#ffffff' });
+        this.add.text(10, 10, 'Enter your name: \nClick to Proceed', { font: '32px Courier', fill: '#ffffff' });
     
-        var playerInput = this.add.text(10, 50, '', { font: '32px Courier', fill: '#ffff00' });
-
-        //var playerName = this.add.text(0, 0, ' ');
+        var playerInput = this.add.text(10, game.config.height/2, '', { font: '32px Courier', fill: '#ffff00' });
     
         this.input.keyboard.on('keydown', function (event) {
 
@@ -33,8 +31,6 @@ class getPlayerInfo extends Phaser.Scene {
 
         //A document that explains each unique keycode: https://github.com/photonstorm/phaser/blob/v3.51.0/src/input/keyboard/keys/KeyCodes.js 
         
-
-
         if (event.keyCode === 8 && playerInput.text.length > 0) { //this is the backspace key; to delete the typed text from playerInput.text string
             playerInput.text = playerInput.text.substr(0, playerInput.text.length - 1); //delete input
         }
