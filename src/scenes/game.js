@@ -2,10 +2,11 @@ class Game extends Phaser.Scene{
     constructor() {
         super("gameScene");
     }
-
+    /*
     init(data) {
         this.info = data; //grab the high score details from previous scene
     }
+    */
 
     // ALL PRELOADS HAVE BEEN MOVED TO PRELOADGAME.JS 
     create() {
@@ -21,6 +22,7 @@ class Game extends Phaser.Scene{
 
         // Define restart key
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
+        //Die key for debug
         keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
 
         // Parallax pieces
@@ -101,7 +103,8 @@ class Game extends Phaser.Scene{
         //ideally we'll base it on random timer callse but for now here we go
         if (this.playerScoreValue == 4){
             this.makeSuitcase();
-            this.playerScoreValue += 1;
+            this.playerScoreValue += 1; //will need to remove it in the future since it's add a extra point to player in order
+                                        //to leave this condition
         }
 
         //move suitcase towards player
@@ -114,13 +117,20 @@ class Game extends Phaser.Scene{
         //update high score when game over
         if (this.gameOver) {
             this.add.image(game.config.width/2, game.config.height/2, 'gameOverScreen');
-            
+            /*
             if(this.playerScoreValue > this.info.highestScore) {
                 this.info.highestScore = this.playerScoreValue;
                 console.log('the latest high score is ' + this.info.highestScore);
             }
-            this.highScoreDisplay.text = this.info.highestScore;  
-        } else { //if the game is not over yet
+            this.highScoreDisplay.text = this.info.highestScore; */ 
+
+            if(this.playerScoreValue > info.highestScore) {
+                info.highestScore = this.playerScoreValue - 1;//for now I subtracted 1 from it since it is needed for the suitcase condition
+                console.log('the latest high score is ' + info.highestScore);
+            }
+            this.highScoreDisplay.text = info.highestScore;
+
+        } else {                                //if the game is not over yet
             this.sky.tilePositionX += .1;
             this.cloud.tilePositionX += .25;
             this.witch.tilePositionX += .5;

@@ -2,12 +2,13 @@ class getPlayerInfo extends Phaser.Scene {
     constructor() {
         // Where the player will put their information
         super("playerInfoScreen");
-        this.tempName = 'Alena';
+        //this.tempName = 'Alena';
     }
-
+    /*
     init(data) {
         this.info = data; //grab the high score details from previous scene
     }
+    */
 
     create () {
 
@@ -39,8 +40,8 @@ class getPlayerInfo extends Phaser.Scene {
         }
         else if (event.keyCode === 32 || (event.keyCode >= 48 && event.keyCode < 90)) { // this is to add space and all upper and lower captial letters to the playerInput.text string
             playerInput.text += event.key; 
-            this.tempName = playerInput.text;
-            this.info.name = this.tempName;
+            //this.tempName = playerInput.text;
+            //this.info.name = this.tempName;
         }
 
         
@@ -54,7 +55,7 @@ class getPlayerInfo extends Phaser.Scene {
         // for debug purposes, when you mouse click, it brings you to the game scene
         this.input.on('pointerdown', function (pointer) {
             this.mouseClick.play();
-            this.scene.start('gameScene', this.info);
+            this.scene.start('gameScene');
         }, this);
 
     }
