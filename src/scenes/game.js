@@ -21,7 +21,7 @@ class Game extends Phaser.Scene{
             typingSound.stop();
         }
 
-        pickUpSound = this.sound.add('sfx_pickUp', { volume: 0.3 });
+        pickUpSound = this.sound.add('sfx_pickUp');
 
         // Define restart key
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
