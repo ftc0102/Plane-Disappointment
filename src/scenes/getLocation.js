@@ -40,7 +40,7 @@ class getLocation extends Phaser.Scene {
             } else if (event.keyCode === 32 || (event.keyCode >= 48 && event.keyCode <= 90)) { // this is to add space and all upper and lower captial letters to the playerInput.text string
                 typingSound.play();
                 playerInputLocation.text += event.key; 
-                info.name = playerInputLocation.text;
+                info.arrivingLocation = playerInputLocation.text;
                 //console.log('player name is ' + info.name); //debug
             }
 

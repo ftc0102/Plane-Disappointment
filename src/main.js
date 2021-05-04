@@ -48,6 +48,7 @@ let bgMusic;
 let infoMusic;
 let typingSound;
 let errorSound;
+let pickUpSound;
 
 // Added keyR for restart game
 let keyR;
