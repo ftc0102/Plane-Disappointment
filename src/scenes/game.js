@@ -30,6 +30,7 @@ class Game extends Phaser.Scene{
         // keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
+        keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         // Parallax pieces
         // The last 2 integers are the dimensions of the image, make sure to set the correct ones.
         // The first 2 integers are the X, Y coordinates
@@ -109,7 +110,6 @@ class Game extends Phaser.Scene{
             }
         ])
 
-
         //physics with suitcase group
         this.physics.add.overlap(this.player, this.suitcaseGroup, function(player, suitcase)
         {
@@ -140,7 +140,7 @@ class Game extends Phaser.Scene{
         //console.log("sodaPattern: " + sodaPattern);
 
         // Mouse click to jump
-        this.input.on('pointerdown', this.jump, this);
+        //this.input.on('pointerdown', this.jump, this);
 
         //delayed call to increase difficulty
         this.hardMode = this.time.delayedCall(30000, () => {
@@ -148,6 +148,8 @@ class Game extends Phaser.Scene{
             suitEnd = 2;
         }, null, this);
             
+        //created mouse for double jump check
+        this.mouse3 = this.input.activePointer;
 
         // have to create foreground last
         this.foreground = this.add.tileSprite(0, 0, 1280, 720, 'foreground').setOrigin(0);
@@ -169,6 +171,21 @@ class Game extends Phaser.Scene{
         //update event timers
         suitcaseTimer += delta;
         sodaTimer += delta;
+
+        //jump function rewrite - credits to geocine @ https://www.html5gamedevs.com/topic/44980-double-jump-phaser-3/
+        const didPressJump = Phaser.Input.Keyboard.JustDown(keyUP);
+        
+        if(didPressJump) {
+            if(this.player.body.onFloor()) {
+                this.canDoubleJump = true;
+                this.player.body.setVelocityY(-700);  //allows the for the player to go up before gravity exists
+            } else if (this.canDoubleJump) {
+                this.canDoubleJump = false;
+                this.player.body.setVelocityY(-500);
+                //console.log('you double jumped');
+            }
+        }
+
 
         //right now, they spawn periodically
         //to make it random all i'll have to do is change the num in the while statements to a random number
@@ -258,21 +275,11 @@ class Game extends Phaser.Scene{
             this.foreground.tilePositionX += 2;
         }
 
-
         // Game Over & Restart
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)){
             this.scene.restart(this.info);
         }
 
-        // Keyboard input! Has to be here and not in create() for some reason, not sure why
-        let cursors = this.input.keyboard.createCursorKeys();
-
-    }
-
-    jump(){
-        if (this.player.body.onFloor() && !this.gameOver){
-            this.player.setVelocityY(-800); //allows the for the player to go up before gravity exists
-        }
     }
 
     makeSuitcase(){
