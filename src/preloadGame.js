@@ -18,7 +18,7 @@ class preloadGame extends Phaser.Scene{
         this.load.image('gameOverScreen', './assets/gameOverTicket.png');
 
         // menuscreen
-        this.load.image('menuscreen', './assets/menuscreen.jpg');
+        this.load.image('menuscreen', './assets/PDnewMenuScreen-01.jpg');
 
         //infoscreen backgrounds
         this.load.image('input_1', './assets/input_1.jpg');
