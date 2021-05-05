@@ -21,13 +21,12 @@ class Game extends Phaser.Scene{
             typingSound.stop();
         }
 
-        pickUpSound = this.sound.add('sfx_pickUp');
-
         // Define restart key
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
         //Die key for debug
-        //keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-
+        // keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+        keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
+        keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
         // Parallax pieces
         // The last 2 integers are the dimensions of the image, make sure to set the correct ones.
         // The first 2 integers are the X, Y coordinates
@@ -125,17 +124,16 @@ class Game extends Phaser.Scene{
         this.physics.add.overlap(this.player, this.sodaGroup, function(player, soda)
         {
             this.playerScoreValue +=1;
-            pickUpSound.play();
             soda.die();
         }, null, this)
 
         //randomness variables
         suitcaseRNG = Phaser.Math.Between(2,4);
-        //console.log("suitcaseRNG: " + suitcaseRNG);
+        console.log("suitcaseRNG: " + suitcaseRNG);
         sodaRNG = Phaser.Math.Between(3,5);
-        //console.log("sodaRNG: " + sodaRNG);
+        console.log("sodaRNG: " + sodaRNG);
         sodaPattern = Phaser.Math.Between(1,3);
-        //console.log("sodaPattern: " + sodaPattern);
+        console.log("sodaPattern: " + sodaPattern);
 
         // Mouse click to jump
         this.input.on('pointerdown', this.jump, this);
@@ -153,6 +151,17 @@ class Game extends Phaser.Scene{
     }
 
     update(time, delta) {
+        if(keyLEFT.isDown && !this.gameOver) {
+            this.player.body.setVelocityX(-400);
+            console.log('slowing down!');
+        } else if (keyRIGHT.isDown && !this.gameOver) {
+            this.player.body.setVelocityX(400);
+            console.log('speeding up!');
+        }
+        else if (!keyLEFT.isDown || !keyRIGHT.isDown) {
+            this.player.body.setVelocityX(0);
+        }
+        
         //update event timers
         suitcaseTimer += delta;
         sodaTimer += delta;
@@ -164,7 +173,7 @@ class Game extends Phaser.Scene{
             this.makeSuitcase();
             suitcaseTimer -= suitcaseRNG*1000;
             suitcaseRNG = Phaser.Math.Between(suitStart,suitEnd);
-            //console.log("suitcaseRNG: " + suitcaseRNG);
+            console.log("suitcaseRNG: " + suitcaseRNG);
         }
 
         while (sodaTimer >= sodaRNG*1000){
@@ -181,9 +190,9 @@ class Game extends Phaser.Scene{
             }    
             sodaTimer -= sodaRNG*1000;
             sodaRNG = Phaser.Math.Between(3,5);
-            //console.log("sodaRNG: " + sodaRNG);
+            console.log("sodaRNG: " + sodaRNG);
             sodaPattern = Phaser.Math.Between(1,3);
-            //console.log("sodaPattern: " + sodaPattern);
+            console.log("sodaPattern: " + sodaPattern);
         }
 
         //update score
@@ -200,7 +209,7 @@ class Game extends Phaser.Scene{
         for (let i=0; i<arrSuit.length; i++){
             if (arrSuit[i].x < 0){
                 arrSuit[i].die();
-                //console.log("suitcase despawned");
+                console.log("suitcase despawned");
             }
         }
 
@@ -208,17 +217,15 @@ class Game extends Phaser.Scene{
         for (let i=0; i<arrSoda.length; i++){
             if (arrSoda[i].x < 0){
                 arrSoda[i].die();
-                //console.log("soda despawned");
+                console.log("soda despawned");
             }
         }
 
         //debug purpose
-        /*
-        if(Phaser.Input.Keyboard.JustDown(keyD)) {
-            this.gameOver = true;
+        // if(Phaser.Input.Keyboard.JustDown(keyD)) {
+        //     this.gameOver = true;
             //this.playerScoreValue += 1;
-        }
-        */
+        // }
 
         //game over screen
         if (this.gameOver) {
