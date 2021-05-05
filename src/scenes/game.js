@@ -21,8 +21,10 @@ class Game extends Phaser.Scene{
             typingSound.stop();
         }
 
-        //pick up sound
+        //sounds
         pickUpSound = this.sound.add('sfx_pickUp');
+        jumpSound1 = this.sound.add('sfx_jump1');
+        jumpSound2 = this.sound.add('sfx_jump2');
 
         // Define restart key
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
@@ -180,13 +182,14 @@ class Game extends Phaser.Scene{
             if(this.player.body.onFloor()) {
                 this.canDoubleJump = true;
                 this.player.body.setVelocityY(-700);  //allows the for the player to go up before gravity exists
+                jumpSound1.play();
             } else if (this.canDoubleJump) {
                 this.canDoubleJump = false;
                 this.player.body.setVelocityY(-500);
+                jumpSound2.play();
                 //console.log('you double jumped');
             }
         }
-
 
         //right now, they spawn periodically
         //to make it random all i'll have to do is change the num in the while statements to a random number

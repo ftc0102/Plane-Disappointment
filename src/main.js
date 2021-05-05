@@ -49,6 +49,8 @@ let infoMusic;
 let typingSound;
 let errorSound;
 let pickUpSound;
+let jumpSound1;
+let jumpSound2;
 let keyLEFT;
 let keyRIGHT;
 let keyUP;

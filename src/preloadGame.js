@@ -43,8 +43,10 @@ class preloadGame extends Phaser.Scene{
         //error sound
         this.load.audio('sfx_error', './assets/error.wav');
         
-        //pick up sfx
+        //sfx
         this.load.audio('sfx_pickUp', './assets/pickupsfx.mp3');
+        this.load.audio('sfx_jump1', './assets/Jump1.wav');
+        this.load.audio('sfx_jump2', './assets/Jump2.wav');
         
     }
     create(){
