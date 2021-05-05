@@ -74,13 +74,25 @@ class Game extends Phaser.Scene{
             },
             fixedWidth: 500
         }
+        // separate config for the score in upper left
+        let scoreConfig2 = {
+            fill: '#1e2138',
+            fontFamily: 'pixelFont',
+            fontSize: '50px',
+            align: 'left',
+            padding: {
+                top: 5,
+                bottom: 5,
+            },
+            fixedWidth: 500
+        }
 
 
         //display "Your Score: " on top left
-        this.playerScoreText = this.add.text(5, 0, 'Your Score: ', scoreConfig);
+        this.playerScoreText = this.add.text(5, 0, 'Your Score: ', scoreConfig2);
         this.playerScoreText.setAlign('left');
         //display actual player score next to the "Your Score: "
-        this.playerScoreDisplay = this.add.text(130, 0, this.playerScoreValue, scoreConfig);
+        this.playerScoreDisplay = this.add.text(250, 0, this.playerScoreValue, scoreConfig2);
 
         //display information on the game over ticket; will be blank before game over screen
         this.nameDisplay1 = this.add.text(385, 320, info.name, scoreConfig);
