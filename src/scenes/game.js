@@ -43,6 +43,9 @@ class Game extends Phaser.Scene{
         this.ground = this.add.tileSprite(0, 0, 1280, 720, 'ground').setOrigin(0);
         this.interior = this.add.tileSprite(0, 0, 1280, 720, 'interior').setOrigin(0);
 
+        this.badge = this.add.image(0, 0, 'scoreBadge').setOrigin(0, 0);
+        this.badge.setScale(1.7);
+
         // Instantiating Player
         this.player = new Player(this, game.config.width/10, game.config.height/4, 'fa').setOrigin(0, 0);
         this.player.anims.play('farun');      // plays the running animation
@@ -78,7 +81,7 @@ class Game extends Phaser.Scene{
         let scoreConfig2 = {
             fill: '#1e2138',
             fontFamily: 'pixelFont',
-            fontSize: '50px',
+            fontSize: '45px',
             align: 'left',
             padding: {
                 top: 5,
@@ -89,10 +92,10 @@ class Game extends Phaser.Scene{
 
 
         //display "Your Score: " on top left
-        this.playerScoreText = this.add.text(5, 0, 'Your Score: ', scoreConfig2);
+        this.playerScoreText = this.add.text(50, 5, 'Your Score: ', scoreConfig2);
         this.playerScoreText.setAlign('left');
         //display actual player score next to the "Your Score: "
-        this.playerScoreDisplay = this.add.text(250, 0, this.playerScoreValue, scoreConfig2);
+        this.playerScoreDisplay = this.add.text(300, 5, this.playerScoreValue, scoreConfig2);
 
         //display information on the game over ticket; will be blank before game over screen
         this.nameDisplay1 = this.add.text(385, 320, info.name, scoreConfig);
@@ -273,6 +276,7 @@ class Game extends Phaser.Scene{
             this.locationDisplay.visible = true;
             this.playerScoreText.visible = false;
             this.playerScoreDisplay.visible = false;
+            this.badge.visible = false;
             //this.add.image(game.config.width/2, game.config.height/2, 'gameOverScreen');
             //pixel font used: https://fonts.google.com/specimen/VT323
 

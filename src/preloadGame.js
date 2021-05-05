@@ -24,8 +24,8 @@ class preloadGame extends Phaser.Scene{
         this.load.image('input_1', './assets/input_1.jpg');
         this.load.image('input_2', './assets/input_2.jpg');
 
-        // Mouse Click Sound
-        this.load.audio('mouseClick', './assets/mouseClick2.ogg');
+        //score background
+        this.load.image('scoreBadge', './assets/badge.png');
         
         // Flight attendant texture atlas
         this.load.atlas('fa', './assets/spritesheet.png', './assets/sprites.json');
@@ -34,16 +34,11 @@ class preloadGame extends Phaser.Scene{
         this.load.audio('backgroundMusic', './assets/bgm.mp3');
         this.load.audio('playerInfoMusic', './assets/relaxingchillstuff.mp3');
 
-        // Keyboard clicking
-        this.load.audio('playerTypingNoise', './assets/keyboardClicksVersion2.mp3');
-
-        // Airplane beep
+        // sfx
+        this.load.audio('mouseClick', './assets/mouseClick2.ogg');
         this.load.audio('airplaneBeep', './assets/airplaneBeep.mp3');
-
-        //error sound
+        this.load.audio('playerTypingNoise', './assets/keyboardClicksVersion2.mp3');
         this.load.audio('sfx_error', './assets/error.wav');
-        
-        //sfx
         this.load.audio('sfx_pickUp', './assets/pickupsfx.mp3');
         this.load.audio('sfx_jump1', './assets/Jump1.wav');
         this.load.audio('sfx_jump2', './assets/Jump2.wav');
