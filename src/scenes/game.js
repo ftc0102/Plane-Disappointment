@@ -21,6 +21,9 @@ class Game extends Phaser.Scene{
             typingSound.stop();
         }
 
+        //pick up sound
+        pickUpSound = this.sound.add('sfx_pickUp');
+
         // Define restart key
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
         //Die key for debug
@@ -124,16 +127,17 @@ class Game extends Phaser.Scene{
         this.physics.add.overlap(this.player, this.sodaGroup, function(player, soda)
         {
             this.playerScoreValue +=1;
+            pickUpSound.play();
             soda.die();
         }, null, this)
 
         //randomness variables
         suitcaseRNG = Phaser.Math.Between(2,4);
-        console.log("suitcaseRNG: " + suitcaseRNG);
+        //console.log("suitcaseRNG: " + suitcaseRNG);
         sodaRNG = Phaser.Math.Between(3,5);
-        console.log("sodaRNG: " + sodaRNG);
+        //console.log("sodaRNG: " + sodaRNG);
         sodaPattern = Phaser.Math.Between(1,3);
-        console.log("sodaPattern: " + sodaPattern);
+        //console.log("sodaPattern: " + sodaPattern);
 
         // Mouse click to jump
         this.input.on('pointerdown', this.jump, this);
@@ -173,7 +177,7 @@ class Game extends Phaser.Scene{
             this.makeSuitcase();
             suitcaseTimer -= suitcaseRNG*1000;
             suitcaseRNG = Phaser.Math.Between(suitStart,suitEnd);
-            console.log("suitcaseRNG: " + suitcaseRNG);
+            //console.log("suitcaseRNG: " + suitcaseRNG);
         }
 
         while (sodaTimer >= sodaRNG*1000){
@@ -190,9 +194,9 @@ class Game extends Phaser.Scene{
             }    
             sodaTimer -= sodaRNG*1000;
             sodaRNG = Phaser.Math.Between(3,5);
-            console.log("sodaRNG: " + sodaRNG);
+            //console.log("sodaRNG: " + sodaRNG);
             sodaPattern = Phaser.Math.Between(1,3);
-            console.log("sodaPattern: " + sodaPattern);
+            //console.log("sodaPattern: " + sodaPattern);
         }
 
         //update score
