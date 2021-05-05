@@ -51,6 +51,7 @@ let errorSound;
 let pickUpSound;
 let keyLEFT;
 let keyRIGHT;
+let keyUP;
 
 // Added keyR for restart game
 let keyR;
@@ -64,7 +65,7 @@ let suitStart = 2
 let suitEnd = 4;
 //debug - press D to get game over
 //let keyD;
-
+let canDoubleJump = false;
 let playerInput;
 let playerInputLocation;
 
