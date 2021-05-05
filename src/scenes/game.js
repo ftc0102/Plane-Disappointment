@@ -157,17 +157,18 @@ class Game extends Phaser.Scene{
     }
 
     update(time, delta) {
-        if(keyLEFT.isDown && !this.gameOver) {
-            this.player.body.setVelocityX(-400);
-            console.log('slowing down!');
-        } else if (keyRIGHT.isDown && !this.gameOver) {
-            this.player.body.setVelocityX(400);
-            console.log('speeding up!');
-        }
-        else if (!keyLEFT.isDown || !keyRIGHT.isDown) {
-            this.player.body.setVelocityX(0);
-        }
-        
+        if (!this.gameOver){
+            if(keyLEFT.isDown && this.player.x >= (game.config.height / 10 )- this.player.body.width) {
+                this.player.body.setVelocityX(-200);
+                console.log('slowing down!');
+            } else if (keyRIGHT.isDown && this.player.x <= game.config.width - this.player.width) {
+                this.player.body.setVelocityX(200);
+                console.log('speeding up!');
+            }
+            else if (!keyLEFT.isDown || !keyRIGHT.isDown) {
+                this.player.body.setVelocityX(0);
+            }
+    }
         //update event timers
         suitcaseTimer += delta;
         sodaTimer += delta;
