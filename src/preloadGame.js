@@ -24,7 +24,7 @@ class preloadGame extends Phaser.Scene{
 
         //infoscreen backgrounds
         this.load.image('input_1', './assets/input_1.jpg');
-        this.load.image('input_2', './assets/input_2.jpg');
+        this.load.image('input_2', './assets/placeInput.jpg');
 
         //score background
         this.load.image('scoreBadge', './assets/badge.png');
