@@ -94,10 +94,10 @@ class Game extends Phaser.Scene{
 
 
         //display "Your Score: " on top left
-        this.playerScoreText = this.add.text(50, 5, 'Your Score: ', scoreConfig2);
+        this.playerScoreText = this.add.text(70, 13, 'Your Score: ', scoreConfig2);
         this.playerScoreText.setAlign('left');
         //display actual player score next to the "Your Score: "
-        this.playerScoreDisplay = this.add.text(300, 5, this.playerScoreValue, scoreConfig2);
+        this.playerScoreDisplay = this.add.text(280, 13, this.playerScoreValue, scoreConfig2);
 
         //display information on the game over ticket; will be blank before game over screen
         this.nameDisplay1 = this.add.text(385, 320, info.name, scoreConfig);
