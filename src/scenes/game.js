@@ -42,6 +42,8 @@ class Game extends Phaser.Scene{
         this.witch = this.add.tileSprite(0, 0, 1280, 720, 'witch').setOrigin(0);
         this.ground = this.add.tileSprite(0, 0, 1280, 720, 'ground').setOrigin(0);
         this.interior = this.add.tileSprite(0, 0, 1280, 720, 'interior').setOrigin(0);
+        this.info = this.add.tileSprite(0, 0, 1280, 720, 'info').setOrigin(0);
+
 
         this.badge = this.add.image(0, 0, 'scoreBadge').setOrigin(0, 0);
         this.badge.setScale(1.7);
