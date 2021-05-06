@@ -19,7 +19,7 @@ class preloadGame extends Phaser.Scene{
 
         // menuscreen
         this.load.image('menuscreen', './assets/PlaneDisappointmentMenuscreen-01.jpg');
-        this.load.image('info', './assets/PlaneDisappointmentInstructions-01.jpg');
+        this.load.image('infoImage', './assets/info.png');
 
 
         //infoscreen backgrounds
